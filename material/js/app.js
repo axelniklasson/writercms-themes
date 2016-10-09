@@ -17,11 +17,11 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
     $httpProvider, cfpLoadingBarProvider, $urlMatcherFactoryProvider) {
         /* Crawler magic */
         $locationProvider.hashPrefix('!');
-        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
 
         /* API Base URL */
-        // $httpProvider.defaults.base_url = 'https://writer.axelniklasson.se';
-        $httpProvider.defaults.base_url = 'http://localhost:3000';
+        $httpProvider.defaults.base_url = 'https://writercms-core.axelniklasson.se';
+        // $httpProvider.defaults.base_url = 'http://localhost:3000';
 
         /* Remove spinner */
         cfpLoadingBarProvider.includeSpinner = false;
