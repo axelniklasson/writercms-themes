@@ -1,0 +1,21 @@
+.spinner-wrapper {
+	width: 100% !important;
+	text-align: center;
+	padding-top: 50%;
+}
+
+.lazy-spinner-wrapper {
+    width: 100% !important;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.spinner-blue.spinner-blue-only {
+	border-color: $primary-color !important;
+}
+
+@media only screen and (min-width: 768px) {
+	.spinner-wrapper {
+		padding-top: 25%;
+	}
+}

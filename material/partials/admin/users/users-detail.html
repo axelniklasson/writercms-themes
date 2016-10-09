@@ -1,0 +1,48 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.users" class="breadcrumb">Användare</a>
+            <a ui-sref="base.admin.users.detail({ id: user._id })" class="breadcrumb">{{ user.firstName }} {{ user.lastName }}</a>
+        </div>
+    </div>
+</nav>
+
+<spinner></spinner>
+
+<div class="container" ng-show="user">
+    <div class="row">
+        <form name="editUserForm">
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input ng-required="true" ng-model="user.firstName" type="text" class="validate" id="userFirstName">
+                    <label ng-class="{ active: user.firstName != '' }" for="userFirstName">Förnamn</label>
+                </div>
+
+                <div class="input-field col s12 m6">
+                    <input ng-required="true" ng-model="user.lastName" type="text" class="validate" id="userLastName">
+                    <label ng-class="{ active: user.lastName != '' }" for="userLastName">Efternamn</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input ng-required="true" ng-model="user.username" type="text" class="validate" id="username">
+                    <label ng-class="{ active: user.username != '' }" for="username">Användarnamn</label>
+                </div>
+
+                <a ng-class="{ disabled: editUserForm.$invalid }" ng-click="updateUser()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
+
+                <a data-target="confirmDeleteModal" class="modal-trigger waves-effect waves-light btn right red lighten-1"><i class="material-icons left">delete</i>Ta bort</a>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Ta bort användare</h4>
+            <p>Vill du verkligen radera användaren? Detta går inte att ångra.</p>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="deleteUser()" class="modal-action modal-close waves-effect waves-light btn right red lighten-1">Ok</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Avbryt</a>
+        </div>
+    </div>

@@ -1,0 +1,25 @@
+/* Color palette */
+@import 'base/_palette.scss';
+
+/* BASE - Main variables used throughout the application */
+@import 'base/_variables.scss';
+@import 'base/_general.scss';
+@import 'base/_mixins.scss';
+@import 'base/_placeholders.scss';
+
+/* MODULES - Reusable elements */
+@import 'modules/_button.scss';
+@import 'modules/_countdown.scss';
+@import 'modules/_form.scss';
+@import 'modules/_lists.scss';
+@import 'modules/_navbar.scss';
+@import 'modules/_post.scss';
+@import 'modules/_separators.scss';
+@import 'modules/_toast.scss';
+@import 'modules/_spinners.scss';
+
+/* PAGES - Different pages and their styles */
+@import 'pages/_about.scss';
+@import 'pages/_route.scss';
+@import 'pages/admin/_dashboard.scss';
+@import 'pages/admin/_login.scss';

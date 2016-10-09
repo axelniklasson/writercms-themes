@@ -1,0 +1,51 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.dashboard" class="breadcrumb">Min profil</a>
+        </div>
+    </div>
+</nav>
+
+<spinner></spinner>
+
+<div class="container" ng-show="!loading">
+    <div class="row">
+        <form name="editProfileForm">
+            <div class="col s12 m10 offset-m1 l10 offset-l1">
+                <div class="input-field col s12">
+                    <input ng-required="true" ng-model="user.firstName" type="text" class="validate" id="user_firstName">
+                    <label ng-class="{ active: user.firstName != '' }" for="user_firstName">Förnamn</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input ng-required="true" ng-model="user.lastName" type="text" class="validate" id="user_lastName">
+                    <label ng-class="{ active: user.lastName != '' }" for="user_lastName">Efternamn</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input ng-required="true" ng-model="user.username" type="text" class="validate" id="user_username">
+                    <label ng-class="{ active: user.username != '' }" for="user_username">Användarnamn</label>
+                </div>
+
+                <div ng-if="user.profilePic" class="col s6">
+                    <div class="card">
+                        <div class="card-image"><img ng-src="{{ user.profilePic }}"></div>
+                        <div class="card-action"><a ng-click="user.profilePic = null;">Ta bort</a></div>
+                    </div>
+                </div>
+
+                <div ng-if="!user.profilePic" class="file-field input-field col s12">
+                    <div class="btn center-align">
+                        <span>Lägg till profilbild</span>
+                        <input type="file" custom-on-change="addProfilePic">
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <a ng-class="{ disabled: editProfileForm.$invalid }" ng-click="updateProfile()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

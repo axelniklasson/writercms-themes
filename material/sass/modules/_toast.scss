@@ -1,0 +1,10 @@
+.toast {
+	a.confirm {
+		display: inline-block;
+		margin-left: 10%;
+	}
+
+	a.confirm.warning {
+		color: $light-red;
+	}
+}

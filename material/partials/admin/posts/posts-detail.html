@@ -1,0 +1,143 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.posts" class="breadcrumb">Inlägg</a>
+            <a ui-sref="base.admin.posts.detail({ id: post._id })" class="breadcrumb">{{ post.title }}</a>
+        </div>
+    </div>
+</nav>
+
+<spinner></spinner>
+
+<div class="container" ng-show="!loading">
+    <div class="row">
+        <form class="" name="editPostForm">
+            <div class="input-field col s12 m6 l6">
+                <input ng-required="true" id="post_title" ng-model="post.title" type="text" class="validate">
+                <label class="active" for="post_title">Titel</label>
+            </div>
+
+            <div class="col s12 m6 l6">
+                <label>Kategorier</label>
+                <select ng-model="post.categories" ng-required="true" class="browser-default" multiple>
+                    <option ng-repeat="category in categories" value="{{ category._id }}">
+                        {{ category.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hide-on-med-and-up">
+            <div class="row">
+                <div class="col s8">
+                    <ul class="tabs">
+                        <li class="tab col s4"><a class="active" href="#post_markdown">Markdown</a></li>
+                        <li class="tab col s4"><a href="#post_html">Resultat</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row" id="post_markdown">
+                <div class="input-field col s12">
+                    <textarea id="post_content" ng-model="post.content" ng-required="true" class="materialize-textarea validate"></textarea>
+                    <label class="active" for="post_content">Innehåll</label>
+                </div>
+            </div>
+
+            <div class="row" id="post_html">
+                <div class="post-content col s12" ng-bind-html="post.content | markdown | trust"></div>
+            </div>
+        </div>
+
+        <div class="hide-on-small-only">
+            <div class="row">
+                <div class="input-field col s6">
+                    <textarea id="post_content_md_up" ng-model="post.content" ng-required="true" class="materialize-textarea validate"></textarea>
+                    <label class="active" for="post_content_md_up">Innehåll</label>
+                </div>
+
+                <div class="post-content col s6" ng-bind-html="post.content | markdown | trust"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <span>Plats: </span>
+                <span>{{ post.location.formatted_address }}</span>
+            </div>
+            <div class="col s12">
+                <a class="waves-effect waves-light btn left">Ta bort plats</a>
+            </div>
+        </div>
+
+        <canvas id="c" style="display:none"></canvas>
+
+        <div class="row">
+            <div class="col s12" ng-show="!loading">
+                <label>Bilder</label>
+            </div>
+            <div class="col s12 m6 l4" ng-repeat="image in post.images track by $index">
+                <div class="card">
+                    <div class="card-image"><img ng-src="{{ image }}"></div>
+                    <div class="card-action"><a ng-click="removePhoto($index)">Ta bort</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-show="!loading">
+            <form action="#">
+                <div class="file-field input-field col s12">
+                    <div class="btn center-align">
+                        <span>Lägg till bilder</span>
+                        <input type="file" multiple custom-on-change="renderImages">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row" ng-show="!loading">
+            <div class="col s12">
+                <a ng-class="{ disabled: editPostForm.$invalid }" ng-click="editPostForm.$invalid || updatePost()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
+                <a data-target="confirmDeleteModal" class="modal-trigger waves-effect waves-light btn right red lighten-1"><i class="material-icons left">delete</i>Ta bort</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div id="updatePostModal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div ng-show="uploadingPost">
+            <h4>Uppdaterar inlägg</h4>
+            <p>Det här kan ta en stund, beroende på internetuppkoppling.</p>
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+
+        <div ng-show="!uploadingPost && updateSuccess">
+            <h4>Klart!</h4>
+            <p>Inägget är nu uppdaterat.</p>
+        </div>
+
+        <div ng-show="!uploadingPost && !updateSuccess">
+            <h4>Något gick fel!</h4>
+            <p>Inägget kunde inte uppdateras.</p>
+        </div>
+    </div>
+    <div class="modal-footer" ng-show="!uploadingPost">
+        <a class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
+    </div>
+</div>
+
+<div id="confirmDeleteModal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <h4>Ta bort inlägg</h4>
+        <p>Vill du verkligen radera inlägget? Detta går inte att ångra.</p>
+    </div>
+    <div class="modal-footer">
+        <a ng-click="deletePost()" class="modal-action modal-close waves-effect waves-light btn right red lighten-1">Ok</a>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Avbryt</a>
+    </div>
+</div>

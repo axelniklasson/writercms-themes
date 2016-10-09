@@ -1,0 +1,41 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.comments" class="breadcrumb">Kommentarer</a>
+            <a ui-sref="base.admin.comments.detail({ id: comment._id })" class="breadcrumb">{{ comment.content }}</a>
+        </div>
+    </div>
+</nav>
+
+<spinner></spinner>
+
+<div class="container" ng-show="!loading">
+    <div class="row">
+        <form name="editCategoryForm">
+            <div class="row">
+                <div class="input-field col s12 l4">
+                    <input ng-required="true" ng-model="comment.userName" type="text" class="validate" id="comment_name">
+                    <label ng-class="{ active: comment.userName != '' }" for="comment_name">Användarnamn</label>
+                </div>
+
+                <div class="input-field col s12 l8">
+                    <input ng-required="true" ng-model="comment.content" type="text" class="validate" id="comment_content">
+                    <label ng-class="{ active: comment.content != '' }" for="comment_content">Innehåll</label>
+                </div>
+
+                <a data-target="confirmDeleteModal" class="modal-trigger waves-effect waves-light btn right red lighten-1"><i class="material-icons left">delete</i>Ta bort</a>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Ta bort kommentar</h4>
+            <p>Vill du verkligen radera kommentaren? Detta går inte att ångra.</p>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="deleteComment()" class="modal-action modal-close waves-effect waves-light btn right red lighten-1">Ok</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Avbryt</a>
+        </div>
+    </div>

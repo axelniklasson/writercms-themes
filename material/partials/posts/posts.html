@@ -1,0 +1,100 @@
+<div>
+
+    <spinner></spinner>
+
+    <lazy-load-posts></lazy-load-posts>
+
+    <div class="posts-wrapper" ng-repeat="post in posts track by $index">
+        <div class="post">
+            <a ng-show="!post.editing" ui-sref="base.postdetail({ year: post.year, month: post.month, slug: post.slug })"><h1 class="post-title">{{ post.title | uppercase }}</h1></a>
+
+            <div class="avatar-separator">
+                <hr class="inline-separator">
+                <img ng-src="{{ post.author.profilePic }}" alt="" />
+            </div>
+
+            <p class="post-date" ng-show="!post.editing">{{ post.date | prettyDate }}</p>
+
+            <a ng-show="authenticated && !post.editing" ng-click="showEditFields(post)" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Ändra</a>
+
+            <div class="editField">
+                <a ng-show="authenticated && post.editing" ng-click="updatePost(post)" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Spara</a>
+
+                <a ng-show="authenticated && post.editing" ng-click="hideEditFields(post)" class="waves-effect waves-light btn grey"><i class="material-icons left">close</i>Avbryt</a>
+            </div>
+
+            <div class="row editField" ng-show="post.editing">
+                <div class="input-field col s12">
+                    <input type="text" placeholder="Titel" ng-model="post.title" id="postTitle" class="materialize-input editField"></textarea>
+                    <label class="active" for="postTitle">Titel</label>
+                </div>
+            </div>
+
+            <div class="row editField" ng-show="post.editing">
+                <div class="input-field col s12">
+                    <textarea ng-model="post.content" placeholder="Innehåll" id="postContent" class="materialize-textarea"></textarea>
+                    <label class="active" for="postContent">Innehåll</label>
+                </div>
+            </div>
+
+            <div ng-show="!post.editing" class="post-content" ng-bind-html="post.content | markdown | trust"></div>
+            <div class="post-images" ng-repeat="image in post.images track by $index">
+                <img image-lazy-load="{{ image }}" image-index="$index" post-index="$parent.$index">
+            </div>
+
+            <div class="post-footer">
+                <div class="post-location" ng-show="post.location.formatted_address != undefined">
+                    <i class="fa fa-map-marker"></i><span> {{ post.location.formatted_address }}</span>
+                </div>
+
+                <ul class="collapsible post-comments" data-collapsible="accordion" ng-show="post.comments.length > 0">
+                    <li ng-repeat="comment in post.comments">
+                        <div class="collapsible-header"><i class="fa fa-user"></i>{{ comment.userName }}<span class="right">{{ comment.date | shortDate}}</span></div>
+                        <div class="collapsible-body"><p>{{ comment.content }}</p></div>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="post-new-comment">
+                    <a ng-show="!newComment" ng-click="showCommentForm()" class="waves-effect waves-light btn"><i class="fa fa-comment"></i> {{ post.comments.length }}</a>
+                    <a ng-show="!newComment" ng-class="{ disabled: post.hasLiked }" ng-click="post.hasLiked || likePost(post)" class="waves-effect waves-light btn"><i class="fa fa-thumbs-up"></i> {{ post.likes }}</a>
+                    <div ng-show="newComment">
+                        <div class="row">
+                            <div class="input-field col s12 left-align">
+                                <input ng-required="true" id="comment_name" ng-model="comment.userName" type="text" class="validate">
+                                <label for="comment_name">Ditt namn</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12 left-align">
+                                <textarea id="comment_content" ng-model="comment.content" ng-required="true" class="materialize-textarea validate"></textarea>
+                                <label for="comment_content">Kommentar</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a ng-show="newComment" ng-click="hideCommentForm()" class="waves-effect waves-light btn grey"><i class="material-icons right">close</i>Avbryt</a>
+                    <a ng-show="newComment" ng-click="submitComment(post)" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Skicka</a>
+                </div>
+            </div>
+
+            <div class="post-share">
+                <a ng-href="https://www.facebook.com/sharer/sharer.php?u=https://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-facebook"></i></a>
+                <a ng-href="https://twitter.com/intent/tweet?text={{ post.title }} %7C https://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-twitter"></i></a>
+                <a ng-href="https://plus.google.com/share?url={{ post.title }} %7C http://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-google-plus"></i></a>
+            </div>
+        </div>
+        <hr class="posts-separator">
+    </div>
+
+    <lazy-spinner></lazy-spinner>
+
+    <div ng-show="authenticated" class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large blue" ui-sref="base.admin.posts.new">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+
+</div>

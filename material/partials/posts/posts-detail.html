@@ -1,0 +1,94 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.posts" class="breadcrumb">Blogg</a>
+            <a ui-sref="base.posts.detail({ id: post._id })" class="breadcrumb">{{ post.title }}</a>
+        </div>
+    </div>
+</nav>
+
+<spinner></spinner>
+
+<div class="post" ng-show="!loading">
+    <h1 ng-show="!editing" class="post-title">{{ post.title | uppercase }}</h1>
+
+    <div class="avatar-separator">
+        <hr class="inline-separator">
+        <img src="img/axel.png" alt="" />
+    </div>
+
+    <p class="post-date" ng-show="!editing">{{ post.date | prettyDate }}</p>
+
+    <a ng-show="authenticated && !editing" ng-click="editing = true" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Ändra</a>
+
+    <div class="editField">
+        <a ng-show="authenticated && editing" ng-click="updatePost(post)" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Spara</a>
+
+        <a ng-show="authenticated && editing" ng-click="editing = false" class="waves-effect waves-light btn grey"><i class="material-icons left">close</i>Avbryt</a>
+    </div>
+
+    <div class="row editField" ng-show="editing">
+        <div class="input-field col s12">
+            <input type="text" placeholder="Titel" ng-model="post.title" id="postTitle" class="materialize-input editField"></textarea>
+            <label class="active" for="postTitle">Titel</label>
+        </div>
+    </div>
+
+    <div class="row editField" ng-show="editing">
+        <div class="input-field col s12">
+            <textarea ng-model="post.content" placeholder="Innehåll" id="postContent" class="materialize-textarea"></textarea>
+            <label class="active" for="postContent">Innehåll</label>
+        </div>
+    </div>
+
+    <div ng-show="!editing" class="post-content" ng-bind-html="post.content | markdown | trust"></div>
+    <div class="post-images" ng-repeat="image in post.images track by $index">
+        <img image-lazy-load="{{ image }}" image-index="$index">
+    </div>
+
+    <div class="post-footer">
+        <div class="post-location" ng-show="post.location.formatted_address != undefined">
+            <i class="fa fa-map-marker"></i><span> {{ post.location.formatted_address }}</span>
+        </div>
+
+        <ul class="collapsible post-comments" data-collapsible="accordion" ng-show="post.comments.length > 0">
+            <li ng-repeat="comment in post.comments">
+                <div class="collapsible-header"><i class="fa fa-user"></i>{{ comment.userName }}<span class="right">{{ comment.date | shortDate}}</span></div>
+                <div class="collapsible-body"><p>{{ comment.content }}</p></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="post-comments">
+        <div class="post-new-comment">
+            <a ng-show="!newComment" ng-click="showCommentForm()" class="waves-effect waves-light btn"><i class="fa fa-comment"></i> {{ post.comments.length }}</a>
+            <a ng-show="!newComment" ng-class="{ disabled: post.hasLiked }" ng-click="post.hasLiked || likePost(post)" class="waves-effect waves-light btn"><i class="fa fa-thumbs-up"></i> {{ post.likes }}</a>
+
+            <div ng-show="newComment">
+                <div class="row">
+                    <div class="input-field col s12 left-align">
+                        <input ng-required="true" id="comment_name" ng-model="comment.userName" type="text" class="validate">
+                        <label for="comment_name">Ditt namn</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 left-align">
+                        <textarea id="comment_content" ng-model="comment.content" ng-required="true" class="materialize-textarea validate"></textarea>
+                        <label for="comment_content">Kommentar</label>
+                    </div>
+                </div>
+            </div>
+
+            <a ng-show="newComment" ng-click="hideCommentForm()" class="waves-effect waves-light btn grey"><i class="material-icons right">close</i>Avbryt</a>
+            <a ng-show="newComment" ng-click="submitComment()" class="waves-effect waves-light btn"><i class="material-icons right">send</i>Skicka</a>
+        </div>
+    </div>
+
+    <div class="post-share">
+        <a ng-href="https://www.facebook.com/sharer/sharer.php?u=https://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-facebook"></i></a>
+        <a ng-href="https://twitter.com/intent/tweet?text={{ post.title }} %7C https://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-twitter"></i></a>
+        <a ng-href="https://plus.google.com/share?url={{ post.title }} %7C http://resa.axelniklasson.se/posts/{{ post.year }}/{{ post.month }}/{{ post.slug }}" target="_blank" class="waves-effect waves-light btn"><i class="fa fa-google-plus"></i></a>
+    </div>
+
+</div>

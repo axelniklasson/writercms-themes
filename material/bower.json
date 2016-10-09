@@ -1,0 +1,25 @@
+{
+  "name": "Dependencies for WriterCMS material theme.",
+  "authors": [
+    "Axel Niklasson <info@axelniklasson.se>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-ui-router": "^0.3.1",
+    "ng-dialog": "^0.6.1",
+    "font-awesome": "^4.6.3",
+    "angular-loading-bar": "^0.9.0",
+    "rrssb": "^1.10.0",
+    "ngmap": "^1.17.3",
+    "ngAnalytics": "nganalytics#^1.1.4",
+    "jquery": "^3.1.0"
+  }
+}

@@ -1,0 +1,153 @@
+.card.small {
+    max-height: 350px;
+}
+
+.card-image {
+    max-height: 100% !important;
+}
+
+.post {
+    text-align: center;
+
+    .avatar-separator {
+        padding-top: 15px;
+        height: 50px;
+
+        img {
+            max-width: 50px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 100;
+            transform: translateY(-50%);
+            padding-bottom: 4px;
+        }
+
+        hr {
+            margin: 0 auto;
+        }
+    }
+
+    h1 {
+        color: black;
+        font-weight: 200;
+        font-size: 2em;
+    }
+
+    .post-date {
+        font-style: italic;
+        font-size: $font-size-mobile;
+        font-weight: 200;
+    }
+
+    .post-content {
+        padding: 3% 5%;
+        font-weight: 700;
+        font-size: $font-size-mobile;
+
+        h1 {
+            font-size: 150%;
+            font-weight: 300;
+        }
+
+        * {
+            font-size: $font-size-mobile;
+        }
+
+    }
+
+    .post-images {
+        width: 100%;
+        text-align: center;
+        padding: 0 !important;
+        margin-bottom: 15px;
+    }
+
+    .post-images img {
+        width: 100% !important;
+        padding: 0;
+    }
+
+    .post-footer {
+
+        i {
+            color: $primary-color;
+            font-size: $font-size-mobile;
+        }
+
+        .post-location, .post-categories, .post-comments-header {
+            max-width: 80%;
+            margin: 10px auto;
+            font-style: italic;
+
+            span {
+                font-weight: 300;
+                font-size: $font-size-mobile;
+            }
+        }
+
+        .post-location {
+            margin-bottom: 30px;
+        }
+
+        .post-comments {
+            text-align: left;
+            font-weight: 300;
+
+            i {
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .post-share {
+        padding: 30px;
+
+        a {
+            margin: 1.5%;
+        }
+    }
+
+    pre {
+        text-align: left !important;
+        background: #EFEFEF;
+        padding: 2.5%;
+    }
+
+    .editField {
+        margin: 15px auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    .post {
+        width: 60%;
+        margin: auto;
+
+        .post-date {
+            font-size: $font-size-tablet * 0.8;
+        }
+
+        .post-content {
+            font-size: $font-size-tablet;
+        }
+
+        .post-images img {
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .post-location ng-map {
+            max-width: 80%;
+            margin-top: 25px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .post-footer {
+            font-size: 125%;
+        }
+
+    }
+
+}

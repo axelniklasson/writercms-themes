@@ -1,0 +1,44 @@
+<nav>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.users" class="breadcrumb">Användare</a>
+            <a ui-sref="base.admin.users.new" class="breadcrumb">Ny användare</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <form name="newUserForm">
+            <div class="input-field col s12 m6">
+                <input ng-required="true" id="userFirstName" ng-model="user.firstName" type="text" class="validate">
+                <label for="userFirstName">Förnamn</label>
+            </div>
+
+            <div class="input-field col s12 m6">
+                <input ng-required="true" id="userLastName" ng-model="user.lastName" type="text" class="validate">
+                <label for="userLastName">Efternamn</label>
+            </div>
+
+            <div class="input-field col s12 m6">
+                <input ng-required="true" id="username" ng-model="user.username" type="text" class="validate">
+                <label for="userFirstName">Användarnamn</label>
+            </div>
+
+            <div class="input-field col s12 m6">
+                <input ng-required="true" id="username" ng-model="user.password1" type="password" class="validate">
+                <label for="userFirstName">Lösenord</label>
+            </div>
+
+            <div class="input-field col s12 m6">
+                <input ng-required="true" id="username" ng-model="user.password2" type="password" class="validate">
+                <label for="userFirstName">Lösenord (igen)</label>
+            </div>
+            
+            <div class="col s12">
+                <a ng-class="{ disabled: newUserForm.$invalid }" ng-click="createUser()" class="waves-effect waves-light btn left"><i class="material-icons left">send</i>Skapa</a>
+            </div>
+        </form>
+    </div>
+</div>

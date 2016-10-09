@@ -1,0 +1,35 @@
+<div ui-view>
+    <nav>
+        <div class="nav-wrapper">
+          <div class="col s12">
+            <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+            <a ui-sref="base.admin.users" class="breadcrumb">Användare</a>
+          </div>
+        </div>
+    </nav>
+
+    <spinner></spinner>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2 l8 offset-l2">
+                <ul class="collection with-header" ng-show="!loading">
+                    <li class="collection-header"><h4>Användare</h4></li>
+                    <li class="collection-item" ng-repeat="user in users">
+                        <div ui-sref="base.admin.users.detail({ id: user._id })">{{ user.firstName }} {{ user.lastName }}
+                            <a ui-sref="base.admin.users.detail({ id: user._id })" class="secondary-content">
+                                <i class="material-icons">send</i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large blue" ui-sref="base.admin.users.new">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
+    </div>
+</div>

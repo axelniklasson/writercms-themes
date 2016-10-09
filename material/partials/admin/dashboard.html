@@ -1,0 +1,116 @@
+<div>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a ui-sref="base.admin" class="breadcrumb">Admin</a>
+                <a ui-sref="base.admin.dashboard" class="breadcrumb">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <spinner></spinner>
+
+    <div class="container" ng-show="status">
+        <div class="row">
+            <div class="col s6 m3 l3">
+                <div class="card" ui-sref="base.admin.posts">
+                    <div class="card-content center">
+                        <i class="medium material-icons center-aligned">archive</i>
+                        <h6>{{ status.posts }} inlägg</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s6 m3 l3">
+                <div class="card" ui-sref="base.admin.categories">
+                    <div class="card-content center">
+                        <i class="medium material-icons center-aligned">archive</i>
+                        <h6>{{ status.categories }} kategorier</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s6 m3 l3">
+                <div class="card" ui-sref="base.admin.users">
+                    <div class="card-content center">
+                        <i class="medium material-icons center-aligned">person</i>
+                        <h6>{{ status.users }} användare</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s6 m3 l3">
+                <div class="card" ui-sref="base.admin.comments">
+                    <div class="card-content center">
+                        <i class="medium material-icons center-aligned">comment</i>
+                        <h6 ng-if="!status.newComments">{{ status.readComments }} kommentarer</h6>
+                        <h6 ng-if="status.newComments && status.newComments == 1"><strong>{{ status.newComments }} ny</strong></h6>
+                        <h6 ng-if="status.newComments && status.newComments > 1"><strong>{{ status.newComments }} nya</strong></h6>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+            <!-- <div class="row"> -->
+            <div class="col s12 m12 l12">
+                <div class="card">
+                    <div class="card-content">
+                        <h4>Google Analytics</h4>
+                        <div id="embed-api-auth-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <h4>Sidvisningar</h4>
+                        <div id="chart-1-container" class="ga-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m12 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <h4>Sessioner</h4>
+                        <div id="chart-2-container" class="ga-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ngAnalytics -->
+            <ng-analytics-auth auth-container="embed-api-auth-container" hide-on-auth="true"></ng-analytics-auth>
+            <ng-analytics-chart chart="pageViewsChart" auth-container="embed-api-auth-container"></ng-analytics-chart>
+            <ng-analytics-chart chart="sessionsChart" auth-container="embed-api-auth-container"></ng-analytics-chart>
+
+            <div class="col s12 m12 l12">
+                <div class="card">
+                    <div class="card-content">
+                        <h4>Senaste inlägget</h4>
+                        <p>{{ lastPost.author.firstName }} postade det senaste inlägget,
+                            <a ui-sref="base.postdetail({ id: lastPost._id })">{{ lastPost.title }}</a>, för {{ lastPost.date | timeSince }} sedan.
+                            Inlägget kategoriserades som
+                            <span ng-repeat="cat in lastPost.categories track by $index">
+                                {{ cat.name }}<span ng-show="$index < lastPost.categories.length - 2">, </span>.
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a ui-sref="base.postdetail({ id: lastPost._id })">Gå till inlägget</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m12 l12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h4>Statistik</h4>
+                            <p>Det postas ungefär {{ stats.postsPerDay }} inlägg per dag som i snitt har {{ stats.avgNbrCategories }} kategorier.
+                                Den flitigaste bloggaren heter {{ stats.topWriter.name }} och har skrivit {{ stats.topWriter.share * 100 }}% av
+                                alla inlägg.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>

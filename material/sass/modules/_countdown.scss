@@ -1,0 +1,21 @@
+.countdown {
+
+    .card-content {
+        overflow: auto;
+    }
+
+    .time-entity {
+        color: #FFAB40;
+        width: 25%;
+        float: left;
+        text-align: center;
+        font-weight: 300;
+        font-size: 125%;
+
+        .ticking {
+            color: black;
+        }
+
+    }
+
+}

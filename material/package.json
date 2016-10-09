@@ -1,0 +1,24 @@
+{
+    "name": "Writer",
+    "version": "0.0.1",
+    "description": "Material theme for WriterCMS.",
+    "author": "Axel Niklasson <info@axelniklasson.se>",
+    "scripts": {
+        "dev": "gulp"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/WriterCMS/writercms-themes.git"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "gulp": "^3.9.1",
+        "gulp-clean-css": "^2.0.10",
+        "gulp-concat": "^2.6.0",
+        "gulp-inject": "^4.1.0",
+        "gulp-main-bower-files": "^1.5.1",
+        "gulp-sass": "^2.3.1",
+        "gulp-server-livereload": "^1.8.0",
+        "gulp-uglify": "^1.5.3"
+    }
+}

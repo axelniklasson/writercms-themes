@@ -1,0 +1,46 @@
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+p {
+	font-weight: 300;
+}
+
+a {
+	color: lighten($primary-color, 5%);
+}
+
+h4.heading {
+	font-weight: 300;
+	text-align: center;
+	margin: 5% auto;
+}
+
+.container .row {
+	margin: 5% auto;
+}
+
+.ga-container {
+	overflow-x: scroll;
+}
+
+.writer-wrapper {
+	padding: 5% 30px;
+	text-align: left;
+
+	span {
+		display: block;
+		color: black;
+		line-height: 30px;
+		font-weight: 300;
+	}
+
+	a {
+		padding: 0;
+		line-height: 30px;
+		height: auto;
+		color: $primary-color;
+		display: inline;
+	}
+}

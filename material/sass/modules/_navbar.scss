@@ -1,0 +1,26 @@
+nav {
+	padding-left: 5%;
+	background: $color1;
+
+	.brand-logo {
+		height: 100%;
+
+		img {
+			height: 100%;
+		}
+
+	}
+
+	ul {
+		line-height: 64px;
+	}
+}
+
+img {
+	max-width: 100%;
+}
+
+
+.nav-wrapper {
+	position: static !important;
+}
