@@ -1,2 +1,2 @@
-# resa.axelniklasson.se
-WriterCMS theme based on material design, currently live at a travel blog found [here](https://resa.axelniklasson.se).
+# Material theme
+WriterCMS theme based on material design, currently live at a travel blog found at [resa.axelniklasson.se](https://resa.axelniklasson.se).
