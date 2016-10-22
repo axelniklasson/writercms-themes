@@ -86,7 +86,6 @@
                     <li ui-sref-active="active"><a ui-sref="base.about">Om oss</a></li>
                     <li ui-sref-active="active" ng-show="!authenticated"><a ui-sref="base.admin">Admin</a></li>
                     <li ui-sref-active="active" ng-show="authenticated"><a class="dropdown-button" href="#!" data-activates="admin-dropdown">Admin<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="https://github.com/axelniklasson/WriterCMS" target="_blank">WriterCMS [{{ versionHash }}] &nbsp;</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
                     <li class="no-padding">
@@ -114,10 +113,6 @@
                                     </ul>
                                 </div>
                             </li>
-                            <hr class="inline-separator">
-                            <div class="writer-wrapper">
-                                <span><a href="https://github.com/axelniklasson/WriterCMS">WriterCMS</a> [{{ versionHash }}]</span>
-                            </div>
                         </ul>
                     </li>
                 </ul>
@@ -126,6 +121,33 @@
     </div>
 
     <div ui-view></div>
+
+
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Asien 2017</h5>
+                    <p class="grey-text text-lighten-4">
+                        En reseblogg som kommer användas under ett halvårs backpacking i Sydostasien under 2017.
+                        Vi heter Axel Niklasson och Martin Lidén och vi kommer skriva av oss här när vi har tid (och Wi-Fi).
+                    </p>
+                    <p class="grey-text text-lighten-4">
+                        Hemsidan använder sig av WriterCMS, som är ett helt egenutvecklat bloggsystem byggt av Axel. Mer information om WriterCMS
+                        hittar man <a class="inverted" href="#">här</a>. En 100% buggfri upplevelse kan tyvärr därför inte garanteras.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Axel Niklasson
+                <a class="grey-text text-lighten-4 right" href="http://axelniklasson.se" target="_blank">axelniklasson.se</a>
+            </div>
+        </div>
+    </footer>
+
 
     <!-- inject:js -->
     <script src="dist/lib_scripts.js"></script>
