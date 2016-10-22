@@ -1,35 +1,21 @@
 <div class="container" id="about">
     <div class="row">
         <h4 class="heading" class="center-aligned">Vilka är då vi?</h4>
-        <div class="col s12 m6 l4 offset-l2">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/axel.png">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Axel Niklasson<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Axel Niklasson<i class="material-icons right">close</i></span>
-                    <p>Jag heter Axel Niklasson och jag är 21 år gammal. Jag arbetar för närvarande som konsult på XLENT i Kristianstad.</p>
-                    <p>Det jag ser mest fram emot med resan är dels dykningen samt att uppleva andra kulturer och få perspektiv på tillvaron.</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="col s12 m6 l4">
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="img/martin.png">
-                </div>
-                <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4">Martin Lidén<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer</a></p>
-                </div>
-                <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">Martin Lidén<i class="material-icons right">close</i></span>
-                    <p>Arbetar på IKEA och taggar resa. Annars läses Teknisk Fysik på Chalmers, där tredje året påbörjas efter resan.</p>
+        <div class="row">
+            <div class="col s12 m6 l4" ng-repeat="user in users">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" ng-src="{{ user.profilePic }}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ user.fullName }}<i class="material-icons right">more_vert</i></span>
+                        <p><a class="activator">Läs mer</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ user.fullName }}<i class="material-icons right">close</i></span>
+                        <p>{{ user.bio }}</p>
+                    </div>
                 </div>
             </div>
         </div>

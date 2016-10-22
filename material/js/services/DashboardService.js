@@ -41,7 +41,7 @@ module.factory('DashboardService', function($http) {
         getVersion: function() {
             var req = {
                 method: 'GET',
-                url: 'https://api.github.com/repos/axelniklasson/WriterCMS/git/refs/heads/master'
+                url: 'https://api.github.com/repos/WriterCMS/writercms-core/git/refs/heads/master'
             }
 
             return $http(req);

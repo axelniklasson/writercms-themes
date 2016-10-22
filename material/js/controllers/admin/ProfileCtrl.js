@@ -20,9 +20,11 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
                 if (ImageService.getOrientation(this.result) == 6) {
                     ImageService.rotate(this.result, 90).then(function(rotatedImage) {
                         $scope.$apply($scope.user.profilePic = rotatedImage);
+                        $scope.$apply($scope.user.updatedPic = true);
                     });
                 } else {
                     $scope.$apply($scope.user.profilePic = this.result);
+                    $scope.$apply($scope.user.updatedPic = true);
                 }
             }
 
@@ -31,6 +33,7 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
     }
 
     $scope.updateProfile = function() {
+
         UserService.updateProfileData($scope.user).success(function(response) {
             Materialize.toast('Din profil är nu uppdaterad!', 2000);
         }).error(function(err) {

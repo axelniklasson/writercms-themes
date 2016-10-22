@@ -13,12 +13,12 @@
     <div class="row">
         <form name="editProfileForm">
             <div class="col s12 m10 offset-m1 l10 offset-l1">
-                <div class="input-field col s12">
+                <div class="input-field col s12 m6">
                     <input ng-required="true" ng-model="user.firstName" type="text" class="validate" id="user_firstName">
                     <label ng-class="{ active: user.firstName != '' }" for="user_firstName">Förnamn</label>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 m6">
                     <input ng-required="true" ng-model="user.lastName" type="text" class="validate" id="user_lastName">
                     <label ng-class="{ active: user.lastName != '' }" for="user_lastName">Efternamn</label>
                 </div>
@@ -28,6 +28,11 @@
                     <label ng-class="{ active: user.username != '' }" for="user_username">Användarnamn</label>
                 </div>
 
+                <div class="input-field col s12">
+                    <textarea id="user_bio" ng-model="user.bio" class="materialize-textarea"></textarea>
+                    <label ng-class="{ active: user.bio != '' }" for="user_bio">Beskrivning</label>
+                </div>
+
                 <div ng-if="user.profilePic" class="col s6">
                     <div class="card">
                         <div class="card-image"><img ng-src="{{ user.profilePic }}"></div>
@@ -35,7 +40,7 @@
                     </div>
                 </div>
 
-                <div ng-if="!user.profilePic" class="file-field input-field col s12">
+                <div ng-if="!user.profilePic" class="file-field input-field col s6">
                     <div class="btn center-align">
                         <span>Lägg till profilbild</span>
                         <input type="file" custom-on-change="addProfilePic">

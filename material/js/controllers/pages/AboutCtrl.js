@@ -1,6 +1,13 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AboutCtrl', function($scope) {
+module.controller('AboutCtrl', function($scope, UserService) {
+
+    UserService.getAllUsers().success(function(response) {
+        $scope.users = response;
+    }).error(function(err) {
+        console.log(err);
+    });
+
     $scope.$emit('newPageLoaded', {
         title: 'Om oss',
         description: 'Vilka är vi egentligen? Här kan man läsa mer om oss som driver sidan.',
