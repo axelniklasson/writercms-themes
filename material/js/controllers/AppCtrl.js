@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AppCtrl', function($scope, $state, AuthService, DashboardService) {
+module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, DashboardService) {
     // Default metadata
     $scope.meta = {
         title: 'Asien 2017',
@@ -15,6 +15,15 @@ module.controller('AppCtrl', function($scope, $state, AuthService, DashboardServ
 
     $scope.$on('newPageLoaded', function(event, metadata) {
         $scope.meta = metadata;
+    });
+
+    // Toggle footer visibility depending on load
+    $rootScope.$on('loading:progress', function (){
+        $scope.showFooter = false;
+    });
+    
+    $rootScope.$on('loading:finish', function (){
+        $scope.showFooter = true;
     });
 
     $scope.logOut = function() {

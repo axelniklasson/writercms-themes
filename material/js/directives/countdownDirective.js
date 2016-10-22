@@ -1,17 +1,11 @@
 var module = angular.module('writer.directives');
 
-module.directive('countdown', function() {
+module.directive('countdown', ['$interval', function($interval) {
     return {
         restrict: 'E',
         templateUrl: 'partials/directives/countdown.html',
         link: function($scope, elem, attrs) {
-
-            $scope.days = 0;
-            $scope.hours = 0;
-            $scope.minutes = 0;
-            $scope.seconds = 0;
-
-            function refresh() {
+            var countdown = function() {
                 var diff = $scope.countdownDate.getTime() - Date.now();
 
                 var days = Math.floor(diff / (1000 * 3600 * 24));
@@ -22,13 +16,14 @@ module.directive('countdown', function() {
                 diff %= (1000 * 60);
                 var seconds = Math.floor(diff / 1000);
 
-                $scope.$apply($scope.days = days);
-                $scope.$apply($scope.hours = hours);
-                $scope.$apply($scope.minutes = minutes);
-                $scope.$apply($scope.seconds = seconds);
+                $scope.days = days;
+                $scope.hours = hours;
+                $scope.minutes = minutes;
+                $scope.seconds = seconds;
             }
 
-            setInterval(refresh, 1000);
+            countdown();
+            $interval(countdown, 1000);
         }
     }
-});
+}]);

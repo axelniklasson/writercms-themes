@@ -32,8 +32,9 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
         /* Fallback URL */
         $urlRouterProvider.otherwise('/posts');
 
-        /* Interceptor */
+        /* Interceptors */
         $httpProvider.interceptors.push('UnauthorizedInterceptor');
+        $httpProvider.interceptors.push('LoadingInterceptor');
 
         $stateProvider
         .state('base', {
