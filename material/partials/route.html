@@ -8,12 +8,13 @@
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <ng-map default-style="true" id="map" zoom="5" center="{{ startLat }}, {{ startLng }}">
-                <marker position="[{{ post.location.geometry.location.lat }}, {{  post.location.geometry.location.lng }}]"
+                <marker class="marker" position="[{{ post.location.geometry.location.lat }}, {{  post.location.geometry.location.lng }}]"
                 ng-repeat="post in posts" on-click="showPost(event, post)">
                 </marker>
 
                 <info-window id="infoWindow">
-                    <div ng-non-bindable>
+                    <div ng-non-bindable class="info-window">
+                        <img ng-src="{{ selectedPost.author.profilePic }}" />
                         <a ui-sref="base.postdetail({ year: selectedPost.year, month: selectedPost.month, slug: selectedPost.slug })">{{ selectedPost.title }}</a><br>
                         <span>{{ selectedPost.date | prettyDate }}</span>
                     </div>

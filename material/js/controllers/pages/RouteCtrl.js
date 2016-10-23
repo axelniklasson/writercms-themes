@@ -15,6 +15,13 @@ module.controller('RouteCtrl', function($scope, PostService, NgMap) {
         $scope.map.showInfoWindow('infoWindow', this);
     };
 
+    $scope.generateIcon = function(post) {
+        return {
+            url: post.author.profilePic,
+            scaledSize: [32, 32]
+        };
+    }
+
     $scope.$emit('newPageLoaded', {
         title: 'Vår rutt',
         description: 'Här finns information om vår rutt och våra planer inför resan.',
