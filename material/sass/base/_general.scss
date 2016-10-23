@@ -14,11 +14,11 @@ a {
 h4.heading {
 	font-weight: 300;
 	text-align: center;
-	margin: 5% auto;
+	margin: 25px auto;
 }
 
 .container .row {
-	margin: 5% auto;
+	margin: 15px auto;
 }
 
 .ga-container {
@@ -43,4 +43,12 @@ h4.heading {
 		color: $primary-color;
 		display: inline;
 	}
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+a.activator {
+	cursor: pointer;
 }

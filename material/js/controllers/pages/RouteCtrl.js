@@ -1,7 +1,19 @@
 var module = angular.module('writer.controllers');
 
-module.controller('RouteCtrl', function($scope) {
-    $scope.countdownDate = new Date(2017, 0, 17, 06, 50, 00);
+module.controller('RouteCtrl', function($scope, PostService, NgMap) {
+    PostService.getAllLocations().success(function(response) {
+        $scope.posts = response;
+        $scope.startLat = $scope.posts[$scope.posts.length - 1].location.geometry.location.lat;
+        $scope.startLng = $scope.posts[$scope.posts.length - 1].location.geometry.location.lng;
+    }).error(function(err) {
+        Materialize.toast('Kunde inte hämta platser!', 2000);
+        console.log(err);
+    });
+
+    $scope.showPost = function(event, post) {
+        $scope.selectedPost = post;
+        $scope.map.showInfoWindow('infoWindow', this);
+    };
 
     $scope.$emit('newPageLoaded', {
         title: 'Vår rutt',

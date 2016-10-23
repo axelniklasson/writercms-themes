@@ -1,13 +1,36 @@
 <div class="container" id="route">
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <countdown></countdown>
+            <h4 class="heading">Vart har vi varit hittills?</h4>
+            <p class="center-align">Kartan nedan visar alla inlägg som taggats med en plats.</p>
         </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <ng-map default-style="true" id="map" zoom="5" center="{{ startLat }}, {{ startLng }}">
+                <marker position="[{{ post.location.geometry.location.lat }}, {{  post.location.geometry.location.lng }}]"
+                ng-repeat="post in posts" on-click="showPost(event, post)">
+                </marker>
 
-        <div class="col s12 m12 l12">
+                <info-window id="infoWindow">
+                    <div ng-non-bindable>
+                        <a ui-sref="base.postdetail({ year: selectedPost.year, month: selectedPost.month, slug: selectedPost.slug })">{{ selectedPost.title }}</a><br>
+                        <span>{{ selectedPost.date | prettyDate }}</span>
+                    </div>
+                </info-window>
+            </ng-map>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
             <h4 class="heading">Vad vi har planerat i de olika länderna</h4>
+            <p class="center-align">Även om planen delvis är att ta allting som det kommer, så är det alltid bra att
+            iallafall ha en aning om några saker man vill hitta på och dessa har vi stolpat upp nedan!</p>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col s12 m6 l4">
             <div class="card small">
                 <div class="card-image waves-effect waves-block waves-light">
@@ -15,7 +38,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Hongkong<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Hongkong</a></p>
+                    <p><a class="activator">Läs mer om Hongkong</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Hongkong<i class="material-icons right">close</i></span>
@@ -31,7 +54,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Vietnam<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Vietnam</a></p>
+                    <p><a class="activator">Läs mer om Vietnam</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Vietnam<i class="material-icons right">close</i></span>
@@ -47,7 +70,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Kambodja<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Kambodja</a></p>
+                    <p><a class="activator">Läs mer om Kambodja</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Kambodja<i class="material-icons right">close</i></span>
@@ -55,7 +78,9 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col s12 m6 l4">
             <div class="card small">
                 <div class="card-image waves-effect waves-block waves-light">
@@ -63,7 +88,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Laos<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Laos</a></p>
+                    <p><a class="activator">Läs mer om Laos</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Laos<i class="material-icons right">close</i></span>
@@ -79,7 +104,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Thailand<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Thailand</a></p>
+                    <p><a class="activator">Läs mer om Thailand</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Thailand<i class="material-icons right">close</i></span>
@@ -95,7 +120,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Malaysia<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Malaysia</a></p>
+                    <p><a class="activator">Läs mer om Malaysia</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Malaysia<i class="material-icons right">close</i></span>
@@ -103,6 +128,9 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row">
 
         <div class="col s12 m6 l4">
             <div class="card small">
@@ -111,7 +139,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Filippinerna<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Filippinerna</a></p>
+                    <p><a class="activator">Läs mer om Filippinerna</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Filippinerna<i class="material-icons right">close</i></span>
@@ -127,7 +155,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Indonesien<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Indonesien</a></p>
+                    <p><a class="activator">Läs mer om Indonesien</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Indonesien<i class="material-icons right">close</i></span>
@@ -143,7 +171,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">Singapore<i class="material-icons right">more_vert</i></span>
-                    <p><a href="#">Läs mer om Singapore</a></p>
+                    <p><a class="activator">Läs mer om Singapore</a></p>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Singapore<i class="material-icons right">close</i></span>

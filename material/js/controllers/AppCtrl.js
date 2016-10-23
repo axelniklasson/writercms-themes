@@ -1,6 +1,9 @@
 var module = angular.module('writer.controllers');
 
 module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, DashboardService) {
+    $scope.showFooter = false;
+    $scope.countdownDate = new Date(2017, 0, 17, 06, 50, 00);
+
     // Default metadata
     $scope.meta = {
         title: 'Asien 2017',
@@ -21,7 +24,7 @@ module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, D
     $rootScope.$on('loading:progress', function (){
         $scope.showFooter = false;
     });
-    
+
     $rootScope.$on('loading:finish', function (){
         $scope.showFooter = true;
     });

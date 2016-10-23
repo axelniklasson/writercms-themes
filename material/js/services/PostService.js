@@ -105,6 +105,17 @@ module.factory('PostService', function($http) {
             }
 
             return $http(req);
+        },
+        getAllLocations: function() {
+            var req = {
+                method: 'GET',
+                url: $http.defaults.base_url + '/posts/locations',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            return $http(req);
         }
     }
 });

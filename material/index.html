@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="writer" ng-controller="AppCtrl">
+<html ng-app="writer" ng-controller="AppCtrl" ng-cloak>
 <head>
     <!-- Basic settings -->
     <title update-title></title>
@@ -122,7 +122,7 @@
 
     <div ui-view></div>
 
-    <footer class="page-footer" ng-show="showFooter">
+    <footer class="page-footer" ng-show="showFooter" ng-cloak>
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -136,6 +136,10 @@
                         hittar man <a class="inverted" href="#">här</a>. En 100% buggfri upplevelse kan tyvärr därför inte garanteras.
                     </p>
                 </div>
+
+                <div class="col l6 s12">
+                    <countdown></countdown>
+                </div>
             </div>
         </div>
         <div class="footer-copyright">
@@ -146,21 +150,15 @@
         </div>
     </footer>
 
-
     <!-- inject:js -->
     <script src="dist/lib_scripts.js"></script>
     <script src="dist/scripts.js"></script>
     <!-- endinject -->
 
+    <!-- Google Maps JS -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3B7uSBsDI5qhOlmruZTcgFzyngTaykQY"></script>
+
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=authorize"></script>
-
-    <!-- Google Analytics -->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
-    <!-- Google Maps JS -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXdVPHiF7sEEF-6jirURd23LYutqEhKKk"
-    async defer></script>
 </body>
 </html>
