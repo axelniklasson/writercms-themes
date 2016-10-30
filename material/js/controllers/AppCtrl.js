@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, DashboardService) {
+module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, DashboardService, SettingsService) {
     $scope.showFooter = false;
     $scope.countdownDate = new Date(2017, 0, 17, 06, 50, 00);
 
@@ -15,6 +15,16 @@ module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, D
             height: 683
         }
     }
+
+    // Fetch all settings
+    SettingsService.getAllSettings().success(function(response) {
+        $rootScope.settings = {};
+        angular.forEach(response, function(settings) {
+            $rootScope.settings[settings.key] = settings.value;
+        });
+    }).error(function(err) {
+        Materialize.toast('Sidans inställningar kunde inte laddas.', 2000);
+    });
 
     $scope.$on('newPageLoaded', function(event, metadata) {
         $scope.meta = metadata;

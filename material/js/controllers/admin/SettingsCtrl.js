@@ -6,7 +6,7 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
 
     SettingsService.getAllSettings().success(function(response) {
         angular.forEach(response, function(settings) {
-            $scope.settings[settings.key] = settings.value;
+            $rootScope.settings[settings.key] = settings.value;
         });
         $scope.loading = false;
     }).error(function(err) {
@@ -14,7 +14,7 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
     });
 
     $scope.saveSetting = function(key) {
-        SettingsService.set(key, $scope.settings[key]).success(function(response) {
+        SettingsService.set(key, $rootScope.settings[key]).success(function(response) {
             Materialize.toast('Sparat!', 2000);
         }).error(function(err) {
             Materialize.toast('Kunde inte spara.', 2000);
