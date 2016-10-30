@@ -9,10 +9,37 @@
     </nav>
 </div>
 
-<div class="container">
+
+<spinner></spinner>
+
+<div class="container" ng-show="!loading">
     <div class="row">
         <div class="col s12">
-            <!-- <a ng-click="authenticateGA()" id="authButton" class="waves-effect waves-light btn"><i class="material-icons left">account_box</i>Google Analytics</a> -->
+            <h3>Inställningar</h3>
+            <p>Här kan du ändra sidans beteende, vad som ska visas och lite annat smått och gott.</p>
+        </div>
+        <div class="col s6">
+            <div class="switch">
+                <p>Footer</p>
+                <label>
+                    Dölj
+                    <input type="checkbox" ng-model="settings.showFooter" ng-change="saveSetting('showFooter')">
+                    <span class="lever"></span>
+                    Visa
+                </label>
+            </div>
+        </div>
+
+        <div class="col s6">
+            <div class="switch">
+                <p>Countdown</p>
+                <label>
+                    Dölj
+                    <input type="checkbox" ng-model="settings.showCountdown" ng-change="saveSetting('showCountdown')">
+                    <span class="lever"></span>
+                    Visa
+                </label>
+            </div>
         </div>
     </div>
 </div>

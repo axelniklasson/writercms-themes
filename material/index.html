@@ -68,6 +68,7 @@
         <li><a ui-sref="base.admin.categories">Kategorier</a></li>
         <li><a ui-sref="base.admin.comments">Kommentarer</a></li>
         <li><a ui-sref="base.admin.profile">Min profil</a></li>
+        <li><a ui-sref="base.admin.settings">Inställningar</a></li>
         <li><a ng-click="logOut()">Logga ut</a></li>
     </ul>
 
@@ -109,6 +110,7 @@
                                         <li><a ui-sref="base.admin.categories">Kategorier</a></li>
                                         <li><a ui-sref="base.admin.comments">Kommentarer</a></li>
                                         <li><a ui-sref="base.admin.profile">Min profil</a></li>
+                                        <li><a ui-sref="base.admin.settings">Inställningar</a></li>
                                         <li><a ng-click="logOut()">Logga ut</a></li>
                                     </ul>
                                 </div>
@@ -122,7 +124,7 @@
 
     <div ui-view></div>
 
-    <footer class="page-footer" ng-show="showFooter" ng-cloak>
+    <footer class="page-footer" ng-show="showFooter && settings.showFooter" ng-cloak>
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -132,12 +134,13 @@
                         Vi heter Axel Niklasson och Martin Lidén och vi kommer skriva av oss här när vi har tid (och Wi-Fi).
                     </p>
                     <p class="grey-text text-lighten-4">
-                        Hemsidan använder sig av WriterCMS, som är ett helt egenutvecklat bloggsystem byggt av Axel. Mer information om WriterCMS
-                        hittar man <a class="inverted" href="#">här</a>. En 100% buggfri upplevelse kan tyvärr därför inte garanteras.
+                        Hemsidan använder sig av WriterCMS, som är ett helt egenutvecklat bloggsystem byggt av Axel och
+                        vi kan tyvärr därför inte garantera en 100% buggfri upplevelse. Mer information om verktyget WriterCMS kan
+                        man hitta <a class="inverted" href="#">här</a>.
                     </p>
                 </div>
 
-                <div class="col l6 s12">
+                <div class="col l6 s12" ng-show="settings.showCountdown">
                     <countdown></countdown>
                 </div>
             </div>
@@ -157,6 +160,9 @@
 
     <!-- Google Maps JS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3B7uSBsDI5qhOlmruZTcgFzyngTaykQY"></script>
+
+    <!-- Google Analytics JS -->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>

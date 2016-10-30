@@ -170,6 +170,13 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
             authenticate: true,
             data: { pageTitle: 'Asien 2017 | Min profil' }
         })
+        .state('base.admin.settings', {
+            url: '/settings',
+            templateUrl: 'partials/admin/settings.html',
+            controller: 'SettingsCtrl',
+            authenticate: true,
+            data: { pageTitle: 'Asien 2017 | Inställningar' }
+        })
     });
 
 
