@@ -40,13 +40,13 @@
             </div>
 
             <div class="col s6 m3 l3">
-                <div class="card" ui-sref="base.admin.comments">
+                <div class="card" ui-sref="base.admin.comments" notify="{{ status.newComments }}">
                     <div class="card-content center">
                         <i class="medium material-icons center-aligned">comment</i>
-                        <h6 ng-if="!status.newComments">{{ status.readComments }} kommentarer</h6>
-                        <h6 ng-if="status.newComments && status.newComments == 1"><strong>{{ status.newComments }} ny</strong></h6>
-                        <h6 ng-if="status.newComments && status.newComments > 1"><strong>{{ status.newComments }} nya</strong></h6>
+                        <h6>{{ status.readComments }} kommentarer</h6>
                     </div>
+
+                    <notification count="status.newComments"></notification>
                 </div>
             </div>
             <!-- </div> -->

@@ -82,7 +82,7 @@ gulp.task('inject', function() {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['lib', 'js', 'styles', 'inject'], function() {
+gulp.task('default', ['bower', 'lib', 'js', 'styles', 'inject'], function() {
     gulp.watch('./js/**/*.js', ['js', 'inject']);
     gulp.watch(['./sass/**/*.scss', '!./sass/materialize/**/*'], ['styles', 'inject']);
     gulp.watch('./bower_components/**/*', ['lib', 'inject']);

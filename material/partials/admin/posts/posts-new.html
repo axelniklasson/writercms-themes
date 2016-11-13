@@ -86,13 +86,11 @@
             </form>
         </div>
 
-        <canvas id="c" style="display:none"></canvas>
-
         <div class="row">
             <div class="col s12">
                 <label>Bilder</label>
             </div>
-            <div class="col s12 m6 l4" ng-repeat="image in images track by $index">
+            <div class="col s6 m4" ng-repeat="image in images track by $index">
                 <div class="card">
                     <div class="card-image"><img ng-src="{{ image }}"></div>
                     <div class="card-action"><a ng-click="removePhoto($index)">Ta bort</a></div>
@@ -124,12 +122,12 @@
             <p>Inägget är nu uppladdat!</p>
         </div>
 
-        <div ng-show="uploadError">
+        <div ng-show="!uploadingPost && uploadError">
             <h4>Någonting gick fel!</h4>
             <p>Var vänlig försök igen.</p>
         </div>
     </div>
     <div class="modal-footer">
-        <a ui-sref="base.admin.posts" ng-show="!uploading" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
+        <a ui-sref="base.admin.posts" ng-show="!uploadingPost" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
     </div>
 </div>

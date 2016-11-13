@@ -6,6 +6,7 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
 
     PostService.getPostByTimeAndSlug($stateParams.year, $stateParams.month, $stateParams.slug).success(function(response) {
         $scope.post = response;
+        $scope.post.hasLiked = LocalStorageService.hasLikedPost($scope.post._id);
         var metadata = {
             title: $scope.post.title,
             description: $scope.post.content,
