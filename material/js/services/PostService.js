@@ -117,16 +117,19 @@ module.factory('PostService', function($http) {
 
             return $http(req);
         },
-        filterByCategories: function(categories) {
+        filter: function(query) {
+            var queryString = '?';
+            angular.forEach(query.categories, function(id) {
+                queryString += 'category=' + id + '&'
+            });
 
-            var query = '?';
-            angular.forEach(categories, function(id) {
-                query += 'category=' + id + '&'
+            angular.forEach(query.authors, function(id) {
+                queryString += 'author=' + id + '&'
             });
 
             var req = {
                 method: 'GET',
-                url: $http.defaults.base_url + '/posts/filter' + query,
+                url: $http.defaults.base_url + '/posts/filter' + queryString,
                 headers: {
                     'Content-Type': 'application/json'
                 }

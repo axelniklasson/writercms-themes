@@ -49,11 +49,11 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
             controller: 'PostCtrl',
             data: { pageTitle: 'Asien 2017 | Blogg' }
         })
-        .state('base.categories', {
-            url: '/categories',
-            templateUrl: 'partials/posts/categories.html',
-            controller: 'PostsByCategoriesCtrl',
-            data: { pageTitle: 'Asien 2017 | Kategorier' }
+        .state('base.archive', {
+            url: '/archive',
+            templateUrl: 'partials/posts/archive.html',
+            controller: 'ArchiveCtrl',
+            data: { pageTitle: 'Asien 2017 | Arkiv' }
         })
         .state('base.postdetail', {
             url: '/posts/:year/:month/:slug',
