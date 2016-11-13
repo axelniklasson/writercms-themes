@@ -6,6 +6,12 @@ module.filter('prettyDate', function() {
     }
 });
 
+module.filter('prettyDateShort', function() {
+    return function(dateString) {
+        return moment(dateString).format('LLL');
+    }
+});
+
 module.filter('shortDate', function() {
     return function(dateString) {
         return moment(dateString).fromNow(true);

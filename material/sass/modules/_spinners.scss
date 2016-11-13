@@ -2,6 +2,10 @@
 	width: 100% !important;
 	text-align: center;
 	padding-top: 50%;
+
+	&.inline {
+		padding: 10% 0;
+	}
 }
 
 .lazy-spinner-wrapper {

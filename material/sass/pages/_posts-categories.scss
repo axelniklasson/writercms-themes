@@ -1,0 +1,12 @@
+.chip {
+    margin: 5px;
+
+    &.filtering {
+        background: $primary-color;
+        color: white;
+    }
+}
+
+.collection-item {
+    cursor: pointer;
+}

@@ -19,3 +19,13 @@ module.directive('lazySpinner', function() {
         '<div class="circle"></div></div></div></div></div>'
     };
 });
+
+module.directive('spin', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'partials/directives/spinner.html',
+        scope: {
+            loading: '=when'
+        }
+    };
+});

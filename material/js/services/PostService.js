@@ -116,6 +116,23 @@ module.factory('PostService', function($http) {
             }
 
             return $http(req);
+        },
+        filterByCategories: function(categories) {
+
+            var query = '?';
+            angular.forEach(categories, function(id) {
+                query += 'category=' + id + '&'
+            });
+
+            var req = {
+                method: 'GET',
+                url: $http.defaults.base_url + '/posts/filter' + query,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            return $http(req);
         }
     }
 });
