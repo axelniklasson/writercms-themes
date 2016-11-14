@@ -49,7 +49,8 @@
                 <li ng-if="!loadingposts && (query.categories.length == 0 && query.authors.length == 0)" class="collection-item">Välj minst en kategori eller författare för att filtrera inlägg.</li>
                 <li ng-if="!loadingPosts && (query.categories.length > 0 || query.authors.length > 0) && (!posts || posts.length == 0)" class="collection-item">Inga inlägg matchades.</li>
                 <li class="collection-item avatar" ui-sref="base.postdetail({ year: post.year, month: post.month, slug: post.slug })" ng-repeat="post in posts">
-                    <img ng-src="{{ post.author.profilePic }}" alt="" class="circle">
+                    <img ng-if="!post.images || post.images.length == 0" ng-src="{{ post.author.profilePic }}" alt="" class="circle">
+                    <img ng-if="post.images || post.images.length > 0" ng-src="{{ post.images[0] }}" alt="" class="circle">
                     <span class="title">{{ post.title }}</span>
                     <p>Skrivet av {{ post.author.fullName }}<br>{{ post.date | prettyDateShort }}</p>
                     <a class="secondary-content" ng-click="markAsRead($index, comment)">

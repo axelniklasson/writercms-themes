@@ -61,8 +61,8 @@
 
     <div class="post-comments">
         <div class="post-new-comment">
-            <a ng-show="!newComment" ng-click="showCommentForm()" class="waves-effect waves-light btn"><i class="fa fa-comment"></i> {{ post.comments.length }}</a>
-            <a ng-show="!newComment" ng-class="{ disabled: post.hasLiked }" ng-click="post.hasLiked || likePost(post)" class="waves-effect waves-light btn"><i class="fa fa-thumbs-up"></i> {{ post.likes }}</a>
+            <a ng-show="!newComment" ng-click="showCommentForm()" class="waves-effect waves-light btn"><i class="fa fa-comment"></i> <span ng-if="post.comments.length > 0">{{ post.comments.length }}</span></a>
+            <a ng-show="!newComment" ng-class="{ disabled: post.hasLiked }" ng-click="post.hasLiked || likePost(post)" class="waves-effect waves-light btn"><i class="fa fa-thumbs-up"></i> <span ng-if="post.likes > 0">{{ post.likes }}</span></a>
 
             <div ng-show="newComment">
                 <div class="row">
