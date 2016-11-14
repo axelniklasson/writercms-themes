@@ -10,7 +10,7 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
         $scope.loading = false;
     })
 
-    $scope.addProfilePic = function() {
+    $scope.addProfilePic = function(event) {
         if (event) {
             var reader = new FileReader();
             var img = new Image();
@@ -23,8 +23,8 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
                         $scope.$apply($scope.user.updatedPic = true);
                     });
                 } else {
-                    $scope.$apply($scope.user.profilePic = this.result);
-                    $scope.$apply($scope.user.updatedPic = true);
+                    $scope.user.profilePic = this.result;
+                    $scope.user.updatedPic = true;
                 }
             }
 

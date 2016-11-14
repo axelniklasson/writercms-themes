@@ -53,7 +53,7 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                             $scope.$apply($scope.images.push(rotatedImage));
                         });
                     } else {
-                        $scope.$apply($scope.images.push(this.result));
+                        $scope.images.push(this.result);
                     }
                 }
 
