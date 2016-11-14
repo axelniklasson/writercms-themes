@@ -14,7 +14,7 @@
 
     <div class="avatar-separator">
         <hr class="inline-separator">
-        <img src="img/axel.png" alt="" />
+        <img ng-src="{{ post.author.profilePic }}" alt="" />
     </div>
 
     <p class="post-date" ng-show="!editing">{{ post.date | prettyDate }}</p>
