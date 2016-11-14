@@ -1,5 +1,6 @@
 .chip {
     margin: 5px;
+    cursor: pointer;
 
     &.filtering {
         background: $primary-color;
