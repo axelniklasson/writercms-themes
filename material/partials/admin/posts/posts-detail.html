@@ -69,9 +69,10 @@
             </div>
         </div>
 
-        <canvas id="c" style="display:none"></canvas>
-
         <div class="row">
+            <div class="col s12">
+                <spin when="renderingImages"></spin>
+            </div>
             <div class="col s12" ng-show="!loading" ng-if="post.images.length > 1">
                 <label>Bilder</label>
             </div>

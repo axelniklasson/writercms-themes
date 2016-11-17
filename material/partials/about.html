@@ -1,7 +1,8 @@
 <div class="container" id="about">
-    <div class="row">
-        <h4 class="heading" class="center-aligned">Vilka är då vi?</h4>
+    <spin when="loading"></spin>
 
+    <div class="row" ng-if="!loading">
+        <h4 class="heading" class="center-aligned">Vilka är då vi?</h4>
         <div class="row">
             <div class="col s12 m6 l4" ng-repeat="user in users">
                 <div class="card">

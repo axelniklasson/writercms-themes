@@ -30,9 +30,13 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
 
     $scope.fetchPlaces();
 
+    $scope.loadingCategories = true;
     CategoryService.getAllCategories().success(function(response) {
         $scope.categories = response;
+        $scope.loadingCategories = false;
     }).error(function(err) {
+        Materialize.toast('Kunde inte hämta kategorier!', 2000);
+        $scope.loadingCategories = false;
         console.log(err);
     });
 
@@ -40,7 +44,9 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
         $scope.images.splice(index, 1);
     }
 
+    $scope.renderingImages = true;
     $scope.renderImages = function(event) {
+        $scope.renderingImages = true;
         if (event) {
             angular.forEach(event.target.files, function(file) {
                 var reader = new FileReader();
@@ -51,9 +57,11 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                     if (ImageService.getOrientation(this.result) == 6) {
                         ImageService.rotate(this.result, 90).then(function(rotatedImage) {
                             $scope.$apply($scope.images.push(rotatedImage));
+                            $scope.renderingImages = false;
                         });
                     } else {
                         $scope.images.push(this.result);
+                        $scope.renderingImages = false;
                     }
                 }
 

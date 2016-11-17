@@ -17,7 +17,7 @@
             </div>
 
             <div class="col s12 m6 l6">
-                <label>Kategorier</label><br>
+                <label>Kategorier</label><spin when="loadingCategories"></spin><br>
                 <div class="chip center-aligned" ng-class="{ toggled: post.categories.indexOf(category._id) != -1 }" ng-click="toggleCategory(category._id)" ng-repeat="category in categories">
                     {{ category.name }}
                 </div>
@@ -85,6 +85,7 @@
         </div>
 
         <div class="row">
+            <spin when="renderingImages"></spin>
             <div class="col s12" ng-if="post.images.length > 0">
                 <label>Bilder</label>
             </div>

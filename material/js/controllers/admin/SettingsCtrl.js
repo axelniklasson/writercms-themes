@@ -15,7 +15,6 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
             }
         });
 
-        $('#laos').trigger('autoresize');
         $scope.loading = false;
     }).error(function(err) {
         $scope.loading = false;

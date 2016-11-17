@@ -1,10 +1,14 @@
 var module = angular.module('writer.controllers');
 
 module.controller('AboutCtrl', function($scope, UserService) {
+    $scope.loading = true;
 
     UserService.getAllUsers().success(function(response) {
+        $scope.loading = false;
         $scope.users = response;
     }).error(function(err) {
+        Materialize.toast('Kunde inte hämta användare.', 2000);
+        $scope.loading = false;
         console.log(err);
     });
 

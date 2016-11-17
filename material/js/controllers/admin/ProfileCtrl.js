@@ -33,12 +33,16 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
     }
 
     $scope.updateProfile = function() {
+        $scope.saving = true;
+        $('#savingProfileModal').openModal();
 
         UserService.updateProfileData($scope.user).success(function(response) {
-            Materialize.toast('Din profil är nu uppdaterad!', 2000);
+            $scope.saving = false;
+            $scope.savingError = false;
         }).error(function(err) {
             console.log(err);
-            Materialize.toast('Din profil kunde inte uppdateras.', 2000);
+            $scope.saving = false;
+            $scope.savingError = true;
         });
     }
 });

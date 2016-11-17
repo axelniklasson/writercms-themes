@@ -54,3 +54,28 @@
         </form>
     </div>
 </div>
+
+<div id="savingProfileModal" class="modal bottom-sheet">
+    <div class="modal-content">
+        <div ng-show="saving">
+            <h4>Spara din profil</h4>
+            <p>Det här kan ta en stund, beroende på internetuppkoppling.</p>
+            <div class="progress">
+                <div class="indeterminate"></div>
+            </div>
+        </div>
+
+        <div ng-show="!saving && !savingError">
+            <h4>Klart!</h4>
+            <p>Din profil är nu sparad!</p>
+        </div>
+
+        <div ng-show="!saving && savingError">
+            <h4>Någonting gick fel!</h4>
+            <p>Var vänlig försök igen.</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a ng-show="!saving" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
+    </div>
+</div>

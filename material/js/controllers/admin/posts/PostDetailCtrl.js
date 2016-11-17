@@ -11,6 +11,7 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     }
 
     $scope.renderImages = function(event) {
+        $scope.renderingImages = true;
         if (event) {
             angular.forEach(event.target.files, function(file) {
                 var reader = new FileReader();
@@ -21,9 +22,11 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
                     if (ImageService.getOrientation(this.result) == 6) {
                         ImageService.rotate(this.result, 90).then(function(rotatedImage) {
                             $scope.$apply($scope.post.images.push(rotatedImage));
+                            $scope.renderingImages = false;
                         });
                     } else {
-                        $scope.$apply($scope.post.images.push(this.result));
+                        $scope.post.images.push(this.result);
+                        $scope.renderingImages = false;
                     }
                 }
 
