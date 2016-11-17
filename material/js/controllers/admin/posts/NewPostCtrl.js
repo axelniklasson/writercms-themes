@@ -88,4 +88,13 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                 $scope.uploadingPost = false;
             });
         }
+
+        $scope.toggleCategory = function(id) {
+            var index = $scope.post.categories.indexOf(id);
+            if (index !== -1) {
+                $scope.post.categories.splice(index, 1);
+            } else {
+                $scope.post.categories.push(id);
+            }
+        }
     });

@@ -47,6 +47,10 @@
     </div>
 
     <div class="post-footer">
+        <div class="chip center-aligned toggled" ng-repeat="category in post.categories">
+            {{ category.name }}
+        </div>
+
         <div class="post-location" ng-show="post.location.formatted_address != undefined">
             <i class="fa fa-map-marker"></i><span> {{ post.location.formatted_address }}</span>
         </div>

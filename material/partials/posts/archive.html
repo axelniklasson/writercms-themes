@@ -23,7 +23,7 @@
             <p>Filtrera inlägg efter en eller flera kategorier. Vid flera valda kategorier visas
                 endast inlägg som tillhör alla valda kategorier.</p>
             <spin when="loadingCategories"></spin>
-            <div class="chip center-aligned" ng-class="{ filtering: query.categories.indexOf(category._id) != -1 }" ng-click="toggleFilter('categories', category._id)" ng-repeat="category in categories">
+            <div class="chip center-aligned" ng-class="{ toggled: query.categories.indexOf(category._id) != -1 }" ng-click="toggleFilter('categories', category._id)" ng-repeat="category in categories">
                 {{ category.name }}
             </div>
         </div>

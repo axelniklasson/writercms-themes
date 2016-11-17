@@ -17,12 +17,10 @@
             </div>
 
             <div class="col s12 m6 l6">
-                <label>Kategorier</label>
-                <select ng-model="post.categories" ng-required="true" class="browser-default" multiple>
-                    <option ng-repeat="category in categories" value="{{ category._id }}">
-                        {{ category.name }}
-                    </option>
-                </select>
+                <label>Kategorier</label><br>
+                <div class="chip center-aligned" ng-class="{ toggled: post.categories.indexOf(category._id) != -1 }" ng-click="toggleCategory(category._id)" ng-repeat="category in categories">
+                    {{ category.name }}
+                </div>
             </div>
         </div>
 
@@ -87,7 +85,7 @@
         </div>
 
         <div class="row">
-            <div class="col s12">
+            <div class="col s12" ng-if="post.images.length > 0">
                 <label>Bilder</label>
             </div>
             <div class="col s6 m4" ng-repeat="image in images track by $index">

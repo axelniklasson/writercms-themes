@@ -55,7 +55,14 @@ module.controller('ArchiveCtrl', function($scope, $stateParams, $timeout, PostSe
         }
     }, true);
 
-    function filterPosts() {
-
-    }
+    $scope.$emit('newPageLoaded', {
+        title: 'Arkiv',
+        description: 'Filtrera inlägg efter författare och kategorier.',
+        author: 'Axel Niklasson',
+        image: {
+            url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg',
+            width: 1024,
+            height: 683
+        }
+    });
 });

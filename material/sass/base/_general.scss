@@ -57,3 +57,13 @@ a.activator {
 .padding-default {
 	padding: 25px 0;
 }
+
+.chip {
+    margin: 5px;
+    cursor: pointer;
+
+    &.toggled {
+        background: $primary-color;
+        color: white;
+    }
+}
