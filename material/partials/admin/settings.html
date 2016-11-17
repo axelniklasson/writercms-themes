@@ -17,6 +17,7 @@
         <div class="col s12">
             <h3>Inställningar</h3>
             <p>Här kan du ändra sidans beteende, vad som ska visas och lite annat smått och gott.</p>
+            <h5>Allmänt</h5>
         </div>
         <div class="col s6">
             <div class="switch">
@@ -40,6 +41,58 @@
                     Visa
                 </label>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <h5>Länder</h5>
+            <p>Naturligtvis kan man använda sig av Markdown i beskrivning av länderna.</p>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="hongkong" class="materialize-textarea" ng-blur="saveSetting('hongkongText')" ng-model="settings.hongkongText"></textarea>
+            <label for="hongkong">Hongkong</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="vietnam" class="materialize-textarea" ng-blur="saveSetting('vietnamText')" ng-model="settings.vietnamText"></textarea>
+            <label for="vietnam">Vietnam</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="cambodia" class="materialize-textarea" ng-blur="saveSetting('cambodiaText')" ng-model="settings.cambodiaText"></textarea>
+            <label for="cambodia">Kambodja</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="laos" class="materialize-textarea" ng-blur="saveSetting('laosText')" ng-model="settings.laosText"></textarea>
+            <label for="laos">Laos</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="thailand" class="materialize-textarea" ng-blur="saveSetting('thailandText')" ng-model="settings.thailandText"></textarea>
+            <label for="thailand">Thailand</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="malaysia" class="materialize-textarea" ng-blur="saveSetting('malaysiaText')" ng-model="settings.malaysiaText"></textarea>
+            <label for="malaysia">Malaysia</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="philippines" class="materialize-textarea" ng-blur="saveSetting('philippinesText')" ng-model="settings.philippinesText"></textarea>
+            <label for="philippines">Filippinerna</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="indonesia" class="materialize-textarea" ng-blur="saveSetting('indonesiaText')" ng-model="settings.indonesiaText"></textarea>
+            <label for="indonesia">Indonesien</label>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="singapore" class="materialize-textarea" ng-blur="saveSetting('singaporeText')" ng-model="settings.singaporeText"></textarea>
+            <label for="singapore">Singapore</label>
         </div>
     </div>
 </div>

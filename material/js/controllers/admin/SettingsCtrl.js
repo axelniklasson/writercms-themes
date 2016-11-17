@@ -5,8 +5,14 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
     $rootScope.settings = {};
 
     SettingsService.getAllSettings().success(function(response) {
-        angular.forEach(response, function(settings) {
-            $rootScope.settings[settings.key] = settings.value;
+        angular.forEach(response, function(setting) {
+            if (setting.value === 'true') {
+                $rootScope.settings[setting.key] = true;
+            } else if (setting.value === 'false') {
+                $rootScope.settings[setting.key] = false;
+            } else {
+                $rootScope.settings[setting.key] = setting.value;
+            }
         });
         $scope.loading = false;
     }).error(function(err) {
