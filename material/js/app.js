@@ -50,7 +50,7 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
             data: { pageTitle: 'Asien 2017 | Blogg' }
         })
         .state('base.archive', {
-            url: '/archive',
+            url: '/archive?category&author',
             templateUrl: 'partials/posts/archive.html',
             controller: 'ArchiveCtrl',
             data: { pageTitle: 'Asien 2017 | Arkiv' }

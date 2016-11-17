@@ -14,6 +14,8 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
                 $rootScope.settings[setting.key] = setting.value;
             }
         });
+
+        $('#laos').trigger('autoresize');
         $scope.loading = false;
     }).error(function(err) {
         $scope.loading = false;

@@ -14,7 +14,7 @@
 
     <div class="avatar-separator">
         <hr class="inline-separator">
-        <img ng-src="{{ post.author.profilePic }}" alt="" />
+        <img ng-src="{{ post.author.profilePic }}" alt="" ui-sref="base.about" />
     </div>
 
     <p class="post-date" ng-show="!editing">{{ post.date | prettyDate }}</p>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="post-footer">
-        <div class="chip center-aligned toggled" ng-repeat="category in post.categories">
+        <div class="chip center-aligned toggled" ng-repeat="category in post.categories" ui-sref="base.archive({category: category._id})">
             {{ category.name }}
         </div>
 

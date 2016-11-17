@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('PostCtrl', function($scope, $timeout, PostService, CommentService, LocalStorageService) {
+module.controller('PostCtrl', function($scope, $state, $timeout, PostService, CommentService, LocalStorageService) {
     $scope.newComment = false;
     $scope.comment = {};
 

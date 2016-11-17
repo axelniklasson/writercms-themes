@@ -3,8 +3,18 @@ var module = angular.module('writer.controllers');
 module.controller('ArchiveCtrl', function($scope, $stateParams, $timeout, PostService, CategoryService, UserService) {
     $scope.loadingCategories = true;
     $scope.loadingAuthors = true;
-
     $scope.query = { categories: [], authors: [] };
+
+    var filterOnLoad;
+    if ($stateParams.category) {
+        Array.isArray($stateParams.category) ? $scope.query.categories = $stateParams.category : $scope.query.categories.push($stateParams.category);
+        filterOnLoad = true;
+    }
+
+    if ($stateParams.author) {
+        Array.isArray($stateParams.author) ? $scope.query.authors = $stateParams.author : $scope.query.authors.push($stateParams.author);
+        filterOnLoad = true;
+    }
 
     CategoryService.getAllCategories().success(function(response) {
         $scope.categories = response;
@@ -38,22 +48,30 @@ module.controller('ArchiveCtrl', function($scope, $stateParams, $timeout, PostSe
         if (init) {
             $timeout(function() { init = false; });
         } else {
-            if ($scope.query.categories.length == 0 && $scope.query.authors.length == 0) {
-                $scope.posts = [];
-            } else {
-                $scope.loadingPosts = true;
-                $scope.posts = [];
-                PostService.filter($scope.query).success(function(response) {
-                    $scope.posts = response;
-                    $scope.loadingPosts = false;
-                }).error(function(err) {
-                    Materialize.toast('Det gick inte att filtrera inlägg!', 2000);
-                    $scope.loadingPosts = false;
-                    console.log(err);
-                });
-            }
+            filter();
         }
     }, true);
+
+    function filter() {
+        if ($scope.query.categories.length == 0 && $scope.query.authors.length == 0) {
+            $scope.posts = [];
+        } else {
+            $scope.loadingPosts = true;
+            $scope.posts = [];
+            PostService.filter($scope.query).success(function(response) {
+                $scope.posts = response;
+                $scope.loadingPosts = false;
+            }).error(function(err) {
+                Materialize.toast('Det gick inte att filtrera inlägg!', 2000);
+                $scope.loadingPosts = false;
+                console.log(err);
+            });
+        }
+    }
+
+    if (filterOnLoad) {
+        filter();
+    }
 
     $scope.$emit('newPageLoaded', {
         title: 'Arkiv',
