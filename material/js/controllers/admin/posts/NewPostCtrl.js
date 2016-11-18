@@ -44,7 +44,6 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
         $scope.images.splice(index, 1);
     }
 
-    $scope.renderingImages = true;
     $scope.renderImages = function(event) {
         $scope.renderingImages = true;
         if (event) {
