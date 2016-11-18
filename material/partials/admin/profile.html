@@ -34,9 +34,14 @@
                 </div>
 
                 <div ng-if="user.profilePic" class="col s6">
+                    <label>Profilbild</label>
                     <div class="card">
-                        <div class="card-image"><img ng-src="{{ user.profilePic }}"></div>
-                        <div class="card-action"><a ng-click="user.profilePic = null;">Ta bort</a></div>
+                        <div class="card-image">
+                            <img ng-src="{{ user.profilePic }}">
+                        </div>
+                        <div class="card-action">
+                            <a ng-click="user.profilePic = null;">Ta bort</a>
+                        </div>
                     </div>
                 </div>
 
@@ -58,7 +63,7 @@
 <div id="savingProfileModal" class="modal bottom-sheet">
     <div class="modal-content">
         <div ng-show="saving">
-            <h4>Spara din profil</h4>
+            <h4>Sparar din profil</h4>
             <p>Det här kan ta en stund, beroende på internetuppkoppling.</p>
             <div class="progress">
                 <div class="indeterminate"></div>

@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">{{ user.fullName }}<i class="material-icons right">close</i></span>
-                        <p>{{ user.bio }}</p>
+                        <div ng-bind-html="user.bio | markdown | trust"></div>
                     </div>
                 </div>
             </div>
