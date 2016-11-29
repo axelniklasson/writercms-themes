@@ -1,7 +1,8 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, CategoryService, PostService, ImageService) {
+module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, CategoryService, PostService, ImageService, LocationService) {
     $scope.loading = true;
+    $scope.placesButtonText = 'Hämta platser igen';
 
     $('.modal-trigger').leanModal();
     $('ul.tabs').tabs();
@@ -9,6 +10,28 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     $scope.removePhoto = function(index) {
         $scope.post.images.splice(index, 1);
     }
+
+    $scope.fetchPlaces = function() {
+        $scope.placesButtonText = 'Hämtar platser ...';
+        LocationService.getCurrentLocation().then(function(location) {
+            var geocoder = new google.maps.Geocoder;
+            var latLng = {
+                lat: location.latitude,
+                lng: location.longitude
+            }
+
+            geocoder.geocode({'location': latLng}, function(results, status) {
+                $scope.$apply($scope.nearbyPlaces = results);
+            });
+            $scope.placesButtonText = 'Hämta platser igen';
+        }).catch(function(err) {
+            console.log(err);
+            $scope.placesButtonText = 'Hämta platser igen';
+            Materialize.toast('Kunde inte hämta platser!', 2000);
+        });
+    }
+
+    $scope.fetchPlaces();
 
     $scope.renderImages = function(event) {
         $scope.renderingImages = true;
@@ -38,6 +61,18 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     $scope.updatePost = function() {
         $('#updatePostModal').openModal();
         $scope.uploadingPost = true;
+
+        // Check if post location has changed
+        if ($scope.post.newLocation) {
+            for (var i = 0; i < $scope.nearbyPlaces.length; i++) {
+                var place = $scope.nearbyPlaces[i];
+                if (place.place_id == $scope.post.newLocation) {
+                    $scope.post.location = place;
+                    break;
+                }
+            }
+        }
+
         PostService.updatePost($scope.post).success(function(response) {
             $scope.uploadingPost = false;
             $scope.updateSuccess = true;
