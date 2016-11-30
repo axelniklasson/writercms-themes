@@ -32,7 +32,7 @@
                     <input ng-required="true" ng-model="user.email" type="email" class="validate" id="user_email">
                     <label ng-class="{ active: user.email != '' }" for="user_email">E-post</label>
                 </div>
-                
+
                 <div class="input-field col s12">
                     <textarea id="user_bio" ng-model="user.bio" class="materialize-textarea"></textarea>
                     <label ng-class="{ active: user.bio != '' }" for="user_bio">Beskrivning</label>
@@ -42,7 +42,7 @@
                     <div class="switch">
                         <p>Notiser</p>
                         <label>
-                            Ta inte emot 
+                            Ta inte emot
                             <input type="checkbox" ng-model="user.receiveNotifications">
                             <span class="lever"></span>
                             Ta emot
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="input-field col s12">
-                    <a ng-class="{ disabled: editProfileForm.$invalid }" ng-click="updateProfile()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
+                    <a ng-class="{ disabled: editProfileForm.$invalid }" ng-click="editProfileForm.$invalid || updateProfile()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
                 </div>
             </div>
         </form>
