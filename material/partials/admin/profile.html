@@ -23,18 +23,35 @@
                     <label ng-class="{ active: user.lastName != '' }" for="user_lastName">Efternamn</label>
                 </div>
 
-                <div class="input-field col s12">
+                <div class="input-field col s12 m6">
                     <input ng-required="true" ng-model="user.username" type="text" class="validate" id="user_username">
                     <label ng-class="{ active: user.username != '' }" for="user_username">Användarnamn</label>
                 </div>
 
+                <div class="input-field col s12 m6">
+                    <input ng-required="true" ng-model="user.email" type="email" class="validate" id="user_email">
+                    <label ng-class="{ active: user.email != '' }" for="user_email">E-post</label>
+                </div>
+                
                 <div class="input-field col s12">
                     <textarea id="user_bio" ng-model="user.bio" class="materialize-textarea"></textarea>
                     <label ng-class="{ active: user.bio != '' }" for="user_bio">Beskrivning</label>
                 </div>
 
+                <div class="col s12">
+                    <div class="switch">
+                        <p>Notiser</p>
+                        <label>
+                            Ta inte emot 
+                            <input type="checkbox" ng-model="user.receiveNotifications">
+                            <span class="lever"></span>
+                            Ta emot
+                        </label>
+                    </div>
+                </div>
+
                 <div ng-if="user.profilePic" class="col s6">
-                    <label>Profilbild</label>
+                    <p>Profilbild</p>
                     <div class="card">
                         <div class="card-image">
                             <img ng-src="{{ user.profilePic }}">

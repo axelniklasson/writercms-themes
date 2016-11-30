@@ -1,3 +1,9 @@
-.card i {
-    color: $primary-color;
+.card {
+    i {
+        color: $primary-color;
+    }
+
+    &.clickable {
+        cursor: pointer;
+    }
 }

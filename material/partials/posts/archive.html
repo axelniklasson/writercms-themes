@@ -33,7 +33,7 @@
         <div class="col s12">
             <h6>Författare</h6>
             <spin when="loadingAuthors"></spin>
-            <div class="chip center-aligned" ng-class="{ filtering: query.authors.indexOf(author._id) != -1 }" ng-click="toggleFilter('authors', author._id)" ng-repeat="author in authors">
+            <div class="chip center-aligned" ng-class="{ toggled: query.authors.indexOf(author._id) != -1 }" ng-click="toggleFilter('authors', author._id)" ng-repeat="author in authors">
                 <img ng-if="!author.profilePic" src="img/ninja.png" alt="" />
                 <img ng-if="author.profilePic" ng-src="{{ author.profilePic }}" alt="Contact Person">
                 {{ author.fullName }}
