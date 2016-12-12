@@ -19,7 +19,8 @@ module.factory('ImageService', function($http) {
                     image.src = base64;
                     image.onload = function() {
                         var ratio = image.width / image.height;
-                        var canvas = document.getElementById("c");
+                        var canvas = document.createElement('canvas');
+                        document.body.appendChild(canvas);
                         var ctx = canvas.getContext("2d");
 
                         canvas.width = image.height;

@@ -9,44 +9,45 @@
 
 <div>
 
-    <spinner></spinner>
-
+    <spin when="loading"></spin>
     <lazy-load-posts></lazy-load-posts>
 
     <div class="posts-wrapper" ng-repeat="post in posts track by $index">
         <div class="post">
-            <a ng-show="!post.editing" ui-sref="base.postdetail({ year: post.year, month: post.month, slug: post.slug })"><h1 class="post-title">{{ post.title | uppercase }}</h1></a>
+            <a ng-show="!ui.editing.active || ui.editing.post != post._id" ui-sref="base.postdetail({ year: post.year, month: post.month, slug: post.slug })"><h1 class="post-title">{{ post.title | uppercase }}</h1></a>
 
-            <div class="avatar-separator">
+            <div class="avatar-separator" ng-show="!ui.editing.active || ui.editing.post != post._id">
                 <hr class="inline-separator">
                 <img ng-src="{{ post.author.profilePic }}" alt="" ui-sref="base.about" />
             </div>
 
-            <p class="post-date" ng-show="!post.editing">{{ post.date | prettyDate }}</p>
+            <p class="post-date" ng-show="!ui.editing.active || ui.editing.post != post._id">{{ post.date | prettyDate }}</p>
 
-            <a ng-show="authenticated && !post.editing" ng-click="showEditFields(post)" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Ändra</a>
+            <a ng-show="authenticated && !ui.editing.active" ng-click="toggleEdit(post)" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Ändra</a>
 
-            <div class="editField">
-                <a ng-show="authenticated && post.editing" ng-click="updatePost(post)" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Spara</a>
+            <div class="editField" ng-if="ui.editing.active && ui.editing.post == post._id">
+                <a ng-show="authenticated" ng-click="updatePost(post)" class="waves-effect waves-light btn"><i class="material-icons left">save</i>Spara</a>
 
-                <a ng-show="authenticated && post.editing" ng-click="hideEditFields(post)" class="waves-effect waves-light btn grey"><i class="material-icons left">close</i>Avbryt</a>
+                <a ng-show="authenticated" ng-click="toggleEdit(post)" class="waves-effect waves-light btn grey"><i class="material-icons left">close</i>Avbryt</a>
             </div>
 
-            <div class="row editField" ng-show="post.editing">
-                <div class="input-field col s12">
-                    <input type="text" placeholder="Titel" ng-model="post.title" id="postTitle" class="materialize-input editField"></textarea>
-                    <label class="active" for="postTitle">Titel</label>
+            <div ng-if="ui.editing.active && ui.editing.post == post._id">
+                <div class="row editField" ng-show="ui.editing.active">
+                    <div class="input-field col s12">
+                        <input type="text" placeholder="Titel" ng-model="post.title" id="postTitle" class="materialize-input editField"></textarea>
+                        <label class="active" for="postTitle">Titel</label>
+                    </div>
+                </div>
+
+                <div class="row editField" ng-show="ui.editing.active">
+                    <div class="input-field col s12">
+                        <textarea ng-model="post.content" placeholder="Innehåll" id="postContent" class="materialize-textarea"></textarea>
+                        <label class="active" for="postContent">Innehåll</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="row editField" ng-show="post.editing">
-                <div class="input-field col s12">
-                    <textarea ng-model="post.content" placeholder="Innehåll" id="postContent" class="materialize-textarea"></textarea>
-                    <label class="active" for="postContent">Innehåll</label>
-                </div>
-            </div>
-
-            <div ng-show="!post.editing" class="post-content" ng-bind-html="post.content | markdown | trust"></div>
+            <div ng-show="!ui.editing.active || ui.editing.post != post._id" class="post-content" ng-bind-html="post.content | markdown | trust"></div>
             <div class="post-images" ng-repeat="image in post.images track by $index">
                 <img image-lazy-load="{{ image }}" image-index="$index" post-index="$parent.$index">
             </div>
@@ -110,4 +111,5 @@
         </a>
     </div>
 
+    <spin when="lazyLoading"></spin>
 </div>

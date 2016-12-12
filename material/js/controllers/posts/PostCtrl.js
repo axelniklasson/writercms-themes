@@ -3,14 +3,23 @@ var module = angular.module('writer.controllers');
 module.controller('PostCtrl', function($scope, $state, $timeout, PostService, CommentService, LocalStorageService) {
     $scope.newComment = false;
     $scope.comment = {};
+    $scope.ui = {
+        editing: {
+            active: false,
+            post: 0
+        }
+    };
 
-    $scope.showEditFields = function(post) {
-        post.editing = true;
-        $('#postContent').trigger('autoresize');
-    }
+    $scope.toggleEdit = function(post) {
+        if (!$scope.ui.editing.active) {
+            $scope.ui.editing.active = true;
+            $scope.ui.editing.post = post._id;
+        } else {
+            $scope.ui.editing.active = false;
+            $scope.ui.editing.post = 0;
+        }
 
-    $scope.hideEditFields = function(post) {
-        post.editing = false;
+        console.log($scope.ui.editing);
     }
 
     $scope.showCommentForm = function() {

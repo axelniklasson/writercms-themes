@@ -8,11 +8,6 @@ module.directive('lazyLoad', function($rootScope, PostService, LocalStorageServi
             var skip = 0;
             var fetchedAll = false;
 
-            $scope.$on('$viewContentLoaded', function() {
-                $scope.loading = true;
-                fetchPosts();
-            });
-
             function fetchPosts() {
                 options.dataSet == null ? $scope.loading = true : $scope.lazyLoading = true;
 
@@ -57,6 +52,7 @@ module.directive('lazyLoad', function($rootScope, PostService, LocalStorageServi
                     document.removeEventListener('scroll', lazyLoad);
                     fetchPosts();
                 } else if (distance >= 200 && !fetchedAll) {
+                    $scope.loading = false;
                     document.addEventListener('scroll', lazyLoad);
                 }
             }

@@ -8,18 +8,18 @@
     </div>
 </nav>
 
-<spinner></spinner>
+<spin when="loading"></spin>
 
-<div class="container" ng-show="!loading">
+<div class="container" ng-if="!loading">
     <div class="row">
         <form name="editCategoryForm">
             <div class="row">
-                <div class="input-field col s12 l4">
+                <div class="input-field col s12 m4">
                     <input ng-required="true" ng-model="comment.userName" type="text" class="validate" id="comment_name">
                     <label ng-class="{ active: comment.userName != '' }" for="comment_name">Användarnamn</label>
                 </div>
 
-                <div class="input-field col s12 l8">
+                <div class="input-field col s12 m8">
                     <input ng-required="true" ng-model="comment.content" type="text" class="validate" id="comment_content">
                     <label ng-class="{ active: comment.content != '' }" for="comment_content">Innehåll</label>
                 </div>

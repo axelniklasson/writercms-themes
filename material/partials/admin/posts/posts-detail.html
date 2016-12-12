@@ -8,7 +8,7 @@
     </div>
 </nav>
 
-<spinner></spinner>
+<spin when="loading"></spin>
 
 <div class="container" ng-show="!loading">
     <div class="row">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="row" ng-if="post.location">
-            <div class="col s12 m4">
+            <div class="col s12">
                 <span>Plats: </span>
                 <span>{{ post.location.formatted_address }}</span>
             </div>
@@ -161,6 +161,3 @@
         <a class="modal-action modal-close waves-effect waves-green btn-flat">Avbryt</a>
     </div>
 </div>
-
-<!-- canvas to be used when rotating images -->
-<canvas id="c" style="display:none"></canvas>

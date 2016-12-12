@@ -127,9 +127,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a ui-sref="base.admin.posts" ng-show="!uploadingPost" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
+        <a ui-sref="base.admin.posts" ng-show="!uploadingPost && !uploadError" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
+        <a ng-show="!uploadingPost && uploadError" class="modal-action modal-close waves-effect waves-light btn right">Ok</a>
     </div>
 </div>
-
-<!-- canvas to be used when rotating images -->
-<canvas id="c" style="display:none"></canvas>
