@@ -18,8 +18,6 @@ module.controller('PostCtrl', function($scope, $state, $timeout, PostService, Co
             $scope.ui.editing.active = false;
             $scope.ui.editing.post = 0;
         }
-
-        console.log($scope.ui.editing);
     }
 
     $scope.showCommentForm = function() {
@@ -44,6 +42,10 @@ module.controller('PostCtrl', function($scope, $state, $timeout, PostService, Co
         PostService.updatePost(post).success(function(response) {
             Materialize.toast('Inlägget är uppdaterat!', 2000);
             post.editing = false;
+            $scope.ui.editing = {
+                active: false,
+                post: 0
+            };
         }).error(function(err) {
             console.log(err);
             Materialize.toast('Inlägget kunde inte uppdateras!', 2000);

@@ -12,7 +12,7 @@
 <div class="post" ng-show="!loading">
     <h1 ng-show="!editing" class="post-title">{{ post.title | uppercase }}</h1>
 
-    <div class="avatar-separator">
+    <div class="avatar-separator" ng-show="!editing">
         <hr class="inline-separator">
         <img ng-src="{{ post.author.profilePic }}" alt="" ui-sref="base.about" />
     </div>
