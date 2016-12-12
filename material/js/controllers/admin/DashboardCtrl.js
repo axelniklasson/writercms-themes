@@ -35,6 +35,8 @@ module.controller('DashboardCtrl', function($scope, DashboardService) {
 
     DashboardService.getStatus().success(function(response) {
         $scope.status = response;
+        $scope.status.readComments = 0;
+        $scope.status.newComments = 0;
 
         angular.forEach(response.comments, function(value, key) {
             if (value.read) {
