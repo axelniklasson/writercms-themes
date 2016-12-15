@@ -8,4 +8,50 @@
             margin: auto;
         }
     }
+
+    .feed {
+        .wrapper {
+            position: relative;
+            padding: 0;
+
+            img {
+                width: 100%;
+            }
+
+            .description, .meta {
+                display: none;
+            }
+
+            .meta {
+                font-size: 1.5em;
+                height: 50px;
+                padding: 10px;
+
+                span {
+                    float: left;
+                }
+
+                span:last-child {
+                    float: right;
+                }
+            }
+
+            &.active .description, &.active .meta {
+                position: absolute;
+                bottom: 7px;
+                left: 0;
+                width: 100%;
+                background: black;
+                color: white;
+                opacity: 0.7;
+                padding: 15px;
+                display: block;
+            }
+
+            &.active .meta {
+                top: 0;
+                padding: 10px;
+            }
+        }
+    }
 }
