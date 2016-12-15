@@ -1,7 +1,8 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AboutCtrl', function($scope, UserService) {
+module.controller('AboutCtrl', function($scope, UserService, SocialService) {
     $scope.loading = true;
+    $scope.loadingFeed = true;
 
     UserService.getAllUsers().success(function(response) {
         $scope.loading = false;
@@ -12,9 +13,18 @@ module.controller('AboutCtrl', function($scope, UserService) {
         console.log(err);
     });
 
+
+    SocialService.getInstaFeed('axel.niklasson').success(function(response){
+        $scope.feed = response;
+        $scope.loadingFeed = false;
+    }).error(function(err) {
+        $scope.loadingFeed = false;
+        $scope.instaFeedError = true;
+    });
+
     $scope.$emit('newPageLoaded', {
         title: 'Om oss',
-        description: 'Vilka är vi egentligen? Här kan man läsa mer om oss som driver sidan.',
+        description: 'Vilka är vi egentligen? Här kan man läsa mer om oss som driver bloggen.',
         author: 'Axel Niklasson',
         image: {
             url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg',

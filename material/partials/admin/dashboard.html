@@ -24,7 +24,7 @@
             <div class="col s6 m3 l3">
                 <div class="card clickable" ui-sref="base.admin.categories">
                     <div class="card-content center">
-                        <i class="medium material-icons center-aligned">archive</i>
+                        <i class="medium material-icons center-aligned">label</i>
                         <h6>{{ status.categories }} kategorier</h6>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="row">
-            <div class="col s12 m4">
+            <div class="col s12">
                 <div class="card">
                     <div class="card-content">
                         <h4>Google Analytics</h4>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m6">
                 <div class="card">
                     <div class="card-content">
                         <h4>Sidvisningar</h4>
@@ -70,11 +70,11 @@
                 </div>
             </div>
 
-            <div class="col s12 m4">
+            <div class="col s12 m6">
                 <div class="card">
                     <div class="card-content">
-                        <h4>Sessioner</h4>
-                        <div id="chart-2-container" class="ga-container"></div>
+                        <h4>Här finns läsarna</h4>
+                        <div id="chart-3-container" class="ga-container"></div>
                     </div>
                 </div>
             </div>
@@ -84,10 +84,10 @@
         <!-- ngAnalytics -->
         <ng-analytics-auth auth-container="embed-api-auth-container" hide-on-auth="true"></ng-analytics-auth>
         <ng-analytics-chart chart="pageViewsChart" auth-container="embed-api-auth-container"></ng-analytics-chart>
-        <ng-analytics-chart chart="sessionsChart" auth-container="embed-api-auth-container"></ng-analytics-chart>
+        <ng-analytics-chart chart="citiesChart" auth-container="embed-api-auth-container"></ng-analytics-chart>
 
         <div class="row">
-            <div class="col s12 m4">
+            <div class="col s12 m6">
                 <div class="card">
                     <div class="card-content">
                         <h4>Senaste inlägget</h4>
@@ -95,26 +95,26 @@
                             <a ui-sref="base.postdetail({ id: lastPost._id })">{{ lastPost.title }}</a>, för {{ lastPost.date | timeSince }} sedan.
                             Inlägget kategoriserades som
                             <span ng-repeat="cat in lastPost.categories track by $index">
-                                {{ cat.name }}<span ng-show="$index < lastPost.categories.length - 2">, </span>.
-                            </p>
-                        </div>
-                        <div class="card-action">
-                            <a ui-sref="base.postdetail({ id: lastPost._id })">Gå till inlägget</a>
+                                <a ui-sref="base.archive({category: cat._id})">{{ cat.name }}</a><span ng-if="$index < lastPost.categories.length - 2" />,</span><span ng-if="$index == lastPost.categories.length - 2" > och</span><span ng-if="$index == lastPost.categories.length - 1">.</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="card-action">
+                        <a ui-sref="base.postdetail({ id: lastPost._id })">Gå till inlägget</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <h4>Statistik</h4>
+                        <p>Det postas ungefär {{ stats.postsPerDay }} inlägg per dag som i snitt har {{ stats.avgNbrCategories }} kategorier.
+                            Den flitigaste bloggaren heter {{ stats.topWriter.name }} och har skrivit {{ stats.topWriter.share * 100 }}% av
+                            alla inlägg.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col s12 m4">
-                    <div class="card">
-                        <div class="card-content">
-                            <h4>Statistik</h4>
-                            <p>Det postas ungefär {{ stats.postsPerDay }} inlägg per dag som i snitt har {{ stats.avgNbrCategories }} kategorier.
-                                Den flitigaste bloggaren heter {{ stats.topWriter.name }} och har skrivit {{ stats.topWriter.share * 100 }}% av
-                                alla inlägg.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
+    </div>
