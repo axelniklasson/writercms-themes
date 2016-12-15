@@ -8,8 +8,8 @@ module.controller('DashboardCtrl', function($scope, DashboardService) {
         query: {
             metrics: 'ga:pageviews',
             dimensions: 'ga:date',
-            'start-date': '30daysAgo',
-            'end-date': 'yesterday',
+            'start-date': '7daysAgo',
+            'end-date': 'today',
             ids: 'ga:123887215'
         },
         chart: {
@@ -18,18 +18,16 @@ module.controller('DashboardCtrl', function($scope, DashboardService) {
         }
     };
 
-    $scope.sessionsChart = {
+    $scope.citiesChart = {
         reportType: 'ga',
         query: {
-            metrics: 'ga:sessions',
-            dimensions: 'ga:date',
-            'start-date': '30daysAgo',
-            'end-date': 'yesterday',
+            metrics: 'ga:pageviews',
+            dimensions: 'ga:city',
             ids: 'ga:123887215'
         },
         chart: {
-            container: 'chart-2-container',
-            type: 'LINE'
+            container: 'chart-3-container',
+            type: 'PIE'
         }
     };
 
