@@ -62,31 +62,14 @@
         <div class="row" ng-if="post.location">
             <div class="col s12">
                 <span>Plats: </span>
-                <span>{{ post.location.formatted_address }}</span>
-            </div>
-        </div>
-
-        <div class="row" ng-if="nearbyPlaces.length > 0">
-            <div class="col s12">
-                <label>Välj ny plats</label>
-                <select ng-model="post.newLocation" class="browser-default">
-                    <option value="">Välj plats</option>
-                    <option ng-repeat="place in nearbyPlaces" value="{{ place.place_id }}">
-                        {{ place.formatted_address }}
-                    </option>
-                </select>
+                <span ng-if="post.location.formatted_address">{{ post.location.formatted_address }}</span>
+                <span ng-if="post.location.name">{{ post.location.name }}</span>
             </div>
         </div>
 
         <div class="row">
             <div class="col s12">
-                <a ng-click="fetchPlaces()" class="waves-effect waves-light btn left"><i class="material-icons left">cached</i>{{ placesButtonText }}</a>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <a ng-click="post.location = null;" class="waves-effect waves-light btn left">Radera plats</a>
+                <a ng-click="post.location = null;" class="waves-effect waves-light btn left">Ta bort plats</a>
             </div>
         </div>
 

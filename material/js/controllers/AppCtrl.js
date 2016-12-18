@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, AuthService, DashboardService, SettingsService, LocalStorageService, SocialService) {
+module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, AuthService, DashboardService, SettingsService, LocalStorageService, SocialService, UserService) {
     $scope.showFooter = false;
     $scope.countdownDate = new Date(2017, 0, 17, 06, 50, 00);
 
@@ -10,6 +10,30 @@ module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, Aut
         twitter: { authenticated: false }
     };
     SocialService.initLinkedAccounts();
+
+    $('.button-collapse').sideNav({
+        menuWidth: 220, // Default is 240
+        closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: false // Choose whether you can drag to open on touch screens
+    });
+
+    $('.button-collapse').click(function() {
+        $('#sidenav-overlay').first().remove();
+    });
+
+    // Load logged in user
+    if ($rootScope.authenticated) {
+        if (LocalStorageService.exists('cachedUser')) {
+            $rootScope.user = LocalStorageService.get('cachedUser');
+        } else {
+            UserService.getProfileData().success(function(response) {
+                LocalStorageService.set('cachedUser', response);
+                $rootScope.user = response;
+            }, function(err) {
+                console.log(err);
+            });
+        }
+    }
 
     // Default metadata
     $scope.meta = {

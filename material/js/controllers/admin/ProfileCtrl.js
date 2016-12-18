@@ -2,6 +2,7 @@ var module = angular.module('writer.controllers');
 
 module.controller('ProfileCtrl', function($scope, UserService, ImageService, SocialService, $facebook) {
     $scope.loading = true;
+    $('.modal').modal();
 
     UserService.getProfileData().success(function(response) {
         $scope.user = response;
@@ -48,7 +49,7 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService, Soc
 
     $scope.updateProfile = function() {
         $scope.saving = true;
-        $('#savingProfileModal').modal();
+        $('#savingProfileModal').modal('open');
 
         UserService.updateProfileData($scope.user).success(function(response) {
             $scope.saving = false;

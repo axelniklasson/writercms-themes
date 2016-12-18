@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <ng-map default-style="true" id="map" zoom="5" center="{{ startLat }}, {{ startLng }}">
+            <ng-map default-style="true" id="map" zoom="7" center="{{ startLat }}, {{ startLng }}">
                 <marker class="marker" position="[{{ post.location.geometry.location.lat }}, {{  post.location.geometry.location.lng }}]"
                 ng-repeat="post in posts" on-click="showPost(event, post)">
                 </marker>

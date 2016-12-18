@@ -20,6 +20,17 @@ img {
 	max-width: 100%;
 }
 
+.side-nav {
+	z-index: 999;
+}
+
+#sidenav-overlay {
+	z-index: 995;
+}
+
+.fixed-action-btn {
+	z-index: 995;
+}
 
 .nav-wrapper {
 	position: static !important;

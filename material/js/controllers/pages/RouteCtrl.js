@@ -3,8 +3,13 @@ var module = angular.module('writer.controllers');
 module.controller('RouteCtrl', function($scope, PostService, NgMap) {
     PostService.getAllLocations().success(function(response) {
         $scope.posts = response;
-        $scope.startLat = $scope.posts[0].location.geometry.location.lat;
-        $scope.startLng = $scope.posts[0].location.geometry.location.lng;
+        if ($scope.posts[0].location.geometry) {
+            $scope.startLat = $scope.posts[0].location.geometry.location.lat;
+            $scope.startLng = $scope.posts[0].location.geometry.location.lng;
+        } else {
+            $scope.startLat = $scope.posts[0].location.location.latitude;
+            $scope.startLng = $scope.posts[0].location.location.longitude;
+        }
     }).error(function(err) {
         Materialize.toast('Kunde inte hämta platser!', 2000);
         console.log(err);
