@@ -1,6 +1,6 @@
 /* Angular init */
 var writer = angular.module('writer', ['ui.router', 'angular-loading-bar', 'ngAnalytics', 'ngMap', 'ngFacebook',
-    'writer.controllers', 'writer.services', 'writer.filters', 'writer.directives', 'writer.interceptors']);
+'writer.controllers', 'writer.services', 'writer.filters', 'writer.directives', 'writer.interceptors']);
 
 /* Module setup */
 angular.module('writer.controllers', []);
@@ -20,7 +20,7 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
         $locationProvider.html5Mode(true);
 
         // Initialize ngFacebook
-        $facebookProvider.setAppId('1606132839695011');
+        $facebookProvider.setAppId('1539788846329411');
         $facebookProvider.setPermissions('publish_actions');
 
         /* API Base URL */
@@ -225,7 +225,6 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
                 event.preventDefault();
             }
         });
-
         $rootScope.$on('$stateChangeSuccess', function (evt, toState) {
             if (toState.name === 'base.admin') {
                 $state.go('base.admin.dashboard');
