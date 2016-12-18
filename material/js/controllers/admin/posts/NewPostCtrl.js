@@ -1,7 +1,8 @@
 var module = angular.module('writer.controllers');
 
-module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, CategoryService, LocationService, PostService, ImageService) {
+module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, CategoryService, LocationService, PostService, ImageService, $facebook) {
     $scope.images = [];
+    $scope.share = { fb: true, twitter: false };
     $scope.post = { categories: [], location: "" };
     $scope.placesButtonText = 'Hämta platser igen';
 
@@ -88,7 +89,28 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
             PostService.createPost(post).success(function(response) {
                 $scope.post = {};
                 $scope.images = [];
-                $scope.uploadingPost = false;
+
+                if ($scope.share.fb) {
+                    // Share post to FB
+                    var payload = {
+                        message: 'Nytt blogginlägg!',
+                        link: window.location.origin + '/posts/' +
+                                response.year + '/' + response.month + '/' + response.slug,
+                        privacy: {
+                            value: 'SELF'
+                        }
+                    };
+
+                    $facebook.api('/me/feed', 'post', payload).then(function(response) {
+                        console.log(response);
+                        $scope.uploadingPost = false;
+                    }, function(err) {
+                        console.log(err);
+                        $scope.uploadingPost = false;
+                    });
+                } else {
+                    $scope.uploadingPost = true;
+                }
             }).error(function(err) {
                 console.log(err);
                 $scope.uploadError = true;

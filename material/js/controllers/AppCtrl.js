@@ -1,8 +1,15 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AppCtrl', function($rootScope, $scope, $state, AuthService, DashboardService, SettingsService) {
+module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, AuthService, DashboardService, SettingsService, LocalStorageService, SocialService) {
     $scope.showFooter = false;
     $scope.countdownDate = new Date(2017, 0, 17, 06, 50, 00);
+
+    // Social stuff
+    $rootScope.social = {
+        fb: { authenticated: false },
+        twitter: { authenticated: false }
+    };
+    SocialService.initLinkedAccounts();
 
     // Default metadata
     $scope.meta = {

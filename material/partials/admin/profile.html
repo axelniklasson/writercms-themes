@@ -38,6 +38,38 @@
                     <label ng-class="{ active: user.bio != '' }" for="user_bio">Beskrivning</label>
                 </div>
 
+                <div class="row">
+                    <div class="col s12">
+                        <h6>Sociala nätverk</h6>
+                    </div>
+
+                    <div class="col s12 m6" ng-if="social.fb.loading">
+                        <spin when="social.fb.loading"></spin>
+                    </div>
+
+                    <div class="col s12 m6" ng-if="!social.fb.loading">
+                        <p>Facebook</p>
+                        <div class="chip" ng-if="!social.fb.authenticated" ng-click="fbLogIn()">
+                            <img src="img/fb.png">
+                            Koppla till Facebook
+                        </div>
+
+                        <div class="chip" ng-if="social.fb.authenticated">
+                            <img ng-src="{{ social.fb.user.picture }}">
+                            {{ social.fb.user.name }}
+                            <i class="close material-icons" ng-click="fbLogOut()">close</i>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <p>Twitter</p>
+                        <div class="chip">
+                            <img src="img/twitter.png" alt="">
+                            Anslut
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col s12">
                     <div class="switch">
                         <p>Notiser</p>

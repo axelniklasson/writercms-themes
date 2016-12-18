@@ -1,0 +1,16 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="600px" height="600px" viewBox="0 0 600 600" enable-background="new 0 0 600 600" xml:space="preserve">
+<rect class="secondary" x="91.546" y="84.172" fill="#FFFFFF" width="357.945" height="430.883"/>
+<g>
+	<defs>
+		<rect id="logo-facebook-circle_1" width="600" height="600"/>
+	</defs>
+	<clipPath id="logo-facebook-circle_2">
+		<use xlink:href="#logo-facebook-circle_1"  overflow="visible"/>
+	</clipPath>
+	<path class="primary" clip-path="url(#logo-facebook-circle_2)" fill="#002b5c" d="M363.869,299.78L363.869,299.78h-42.007v149.708h-62.23V299.78h-29.578v-52.899
+		h29.578v-34.242c0-24.495,11.648-62.801,62.803-62.801l46.1,0.182v51.362h-33.46c-5.447,0-13.212,2.71-13.212,14.411v31.088h47.453
+		L363.869,299.78z M299.659-0.001C134.156-0.001-0.025,134.176-0.025,299.676c0,165.526,134.181,299.651,299.684,299.651
+		c165.504,0,299.684-134.125,299.684-299.651C599.343,134.176,465.163-0.001,299.659-0.001"/>
+</g>
+</svg>

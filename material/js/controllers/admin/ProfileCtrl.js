@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
+module.controller('ProfileCtrl', function($scope, UserService, ImageService, SocialService, $facebook) {
     $scope.loading = true;
 
     UserService.getProfileData().success(function(response) {
@@ -30,6 +30,20 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService) {
 
             reader.readAsDataURL(event.target.files[0]);
         }
+    }
+
+    $scope.fbLogIn = function() {
+        $facebook.login().then(function() {
+            SocialService.getFacebookUserData();
+        });
+    }
+
+    $scope.fbLogOut = function() {
+        $facebook.logout().then(function(response) {
+            SocialService.removeStashedFacebookUser();
+        }, function(err) {
+            console.log(err);
+        });
     }
 
     $scope.updateProfile = function() {
