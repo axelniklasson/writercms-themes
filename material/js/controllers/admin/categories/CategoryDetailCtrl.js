@@ -1,7 +1,7 @@
 var module = angular.module('writer.controllers');
 
 module.controller('AdminCategoryDetailCtrl', function($scope, $stateParams, $state, CategoryService) {
-    $('.modal-trigger').modal();
+    $('.modal').modal();
     $scope.loading = true;
 
     CategoryService.getCategoryByID($stateParams.id).success(function(response) {

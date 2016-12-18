@@ -5,24 +5,27 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
     $scope.share = { fb: true, twitter: false };
     $scope.post = { categories: [], location: "" };
     $scope.placesButtonText = 'Hämta platser igen';
-    $scope.placeQuery = '';
+    $scope.fetchPlacesFromFB = true;
+    $scope.customLocation = {};
 
     $('ul.tabs').tabs();
-    $('.modal-trigger').modal();
+    $('.modal').modal();
 
     $scope.fetchPlaces = function() {
         $scope.fetchingPlaces = true;
 
-        LocationService.findNearbyFBPlaces($scope.placeQuery).then(function(response) {
+        LocationService.findNearbyFBPlaces().then(function(response) {
             var places = {};
+            $scope.fbPlaces = {};
             angular.forEach(response.data, function(place) {
                 places[place.name] = null;
+                $scope.fbPlaces[place.name] = place;
             });
 
+            $scope.fetchingPlaces = false;
             $('input.autocomplete').autocomplete({
                 data: places
             });
-            $scope.fetchingPlaces = false;
         }, function(err) {
             Materialize.toast('Kunde inte hämta platser!', 2000);
             console.log(err);
@@ -70,20 +73,36 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
         }
     }
 
+    $scope.$watch('fetchPlacesFromFB', function(newVal, oldVal) {
+        if (newVal != oldVal && !newVal) {
+            $scope.fetchingPlaces = true;
+            LocationService.getCurrentLocation().then(function(response) {
+                $scope.customLocation.latitude = response.latitude;
+                $scope.customLocation.longitude = response.longitude;
+                $scope.fetchingPlaces = false;
+            }, function(err) {
+                console.log(err);
+                $scope.fetchingPlaces = false;
+            });
+        }
+    });
+
     $scope.submitPost = function() {
         $scope.uploadingPost = true;
-        $('#createPostModal').openModal();
+        $('#createPostModal').modal('open');
         var post = { title: $scope.post.title, content: $scope.post.content, images: $scope.images,
             author: localStorage.getItem('userID'), categories: $scope.post.categories };
 
-            if ($scope.post.location != null && $scope.post.location != "") {
-                for (var i = 0; i < $scope.nearbyPlaces.length; i++) {
-                    var place = $scope.nearbyPlaces[i];
-                    if (place.place_id == $scope.post.location) {
-                        post.location = place;
-                        break;
+            if ($scope.fetchPlacesFromFB) {
+                post.location = $scope.fbPlaces[$('#fbLocationInput').val()];
+            } else {
+                post.location = {
+                    name: $scope.customLocation.name,
+                    location: {
+                        latitude: $scope.customLocation.latitude,
+                        longitude: $scope.customLocation.longitude
                     }
-                }
+                };
             }
 
             PostService.createPost(post).success(function(response) {
@@ -98,8 +117,11 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                         response.year + '/' + response.month + '/' + response.slug
                     };
 
+                    if ($scope.fetchPlacesFromFB && post.location) {
+                        payload.place = post.location.id;
+                    }
+
                     $facebook.api('/me/feed', 'post', payload).then(function(response) {
-                        console.log(response);
                         $scope.uploadingPost = false;
                     }, function(err) {
                         console.log(err);

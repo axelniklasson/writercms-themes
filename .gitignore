@@ -3,3 +3,4 @@ bower_components
 *.log
 node_modules
 material/lib
+yarn.lock

@@ -56,9 +56,23 @@
         </div>
 
         <div class="row">
-            <div class="input-field col s12">
-                <input type="text" ng-model="placeQuery" id="autocomplete-input" class="autocomplete" ng-class="{ loading: fetchingPlaces }" ng-change="queryChanged()">
-                <label for="autocomplete-input">Plats</label>
+            <div class="col s12">
+                <h6>Plats</h6>
+                <p>
+                   <input type="checkbox" id="fetchFromFB" ng-model="fetchPlacesFromFB" />
+                   <label for="fetchFromFB">Hämta platser från Facebook</label>
+                 </p>
+            </div>
+
+            <spin when="fetchingPlaces"></spin>
+            <div class="input-field col s12" ng-hide="fetchingPlaces || !fetchPlacesFromFB">
+                <input ng-model="post.location" type="text" id="fbLocationInput" class="autocomplete">
+                <label for="fbLocationInput">Plats</label>
+            </div>
+
+            <div class="input-field col s12" ng-hide="fetchingPlaces || fetchPlacesFromFB">
+                <input type="text" id="locationInput2" ng-model="customLocation.name">
+                <label for="locationInput2">Plats</label>
             </div>
         </div>
 

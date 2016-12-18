@@ -25,13 +25,13 @@ module.factory('LocationService', function($http, $facebook) {
 
             return promise;
         },
-        findNearbyFBPlaces: function(query) {
+        findNearbyFBPlaces: function() {
             var self = this;
             var promise = new Promise(
                 function(resolve, reject) {
                     self.getCurrentLocation().then(function(location) {
-                        $facebook.api('/search?q=' + query + '&center=' + location.latitude + ',' +
-                            location.longitude + '&distance=1000&type=place&limit=10').then(function(response) {
+                        $facebook.api('/search?q=&center=' + location.latitude + ',' +
+                            location.longitude + '&distance=3000&type=place').then(function(response) {
                                 resolve(response);
                             }, function(err) {
                                 reject(err);

@@ -48,7 +48,7 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService, Soc
 
     $scope.updateProfile = function() {
         $scope.saving = true;
-        $('#savingProfileModal').openModal();
+        $('#savingProfileModal').modal();
 
         UserService.updateProfileData($scope.user).success(function(response) {
             $scope.saving = false;

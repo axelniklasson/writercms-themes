@@ -4,7 +4,7 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     $scope.loading = true;
     $scope.placesButtonText = 'Hämta platser igen';
 
-    $('.modal-trigger').modal();
+    $('.modal').modal();
     $('ul.tabs').tabs();
 
     $scope.removePhoto = function(index) {
@@ -59,7 +59,7 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     }
 
     $scope.updatePost = function() {
-        $('#updatePostModal').openModal();
+        $('#updatePostModal').modal();
         $scope.uploadingPost = true;
 
         // Check if post location has changed
