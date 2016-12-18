@@ -56,76 +56,83 @@
         </div>
 
         <div class="row">
-            <div class="col s12">
-                <label>Plats</label>
-                <select ng-model="post.location" class="browser-default">
-                    <option value="">Välj plats</option>
-                    <option ng-repeat="place in nearbyPlaces" value="{{ place.place_id }}">
-                        {{ place.formatted_address }}
-                    </option>
-                </select>
+            <div class="input-field col s12">
+                <input type="text" ng-model="placeQuery" id="autocomplete-input" class="autocomplete" ng-class="{ loading: fetchingPlaces }" ng-change="queryChanged()">
+                <label for="autocomplete-input">Plats</label>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col s12">
-                <a ng-click="fetchPlaces()" class="waves-effect waves-light btn left"><i class="material-icons left">cached</i>{{ placesButtonText }}</a>
+        <!-- <div class="row">
+        <div class="col s12">
+        <label>Plats</label>
+        <select ng-model="post.location" class="browser-default">
+        <option value="">Välj plats</option>
+        <option ng-repeat="place in nearbyPlaces" value="{{ place.place_id }}">
+        {{ place.formatted_address }}
+    </option>
+</select>
+</div>
+</div>
+
+<div class="row">
+<div class="col s12">
+<a ng-click="fetchPlaces()" class="waves-effect waves-light btn left"><i class="material-icons left">cached</i>{{ placesButtonText }}</a>
+</div>
+</div> -->
+
+<div class="row">
+    <div class="col s6">
+        <div class="switch">
+            <p>Dela på Facebook</p>
+            <label>
+                <input type="checkbox" ng-model="share.fb">
+                <span class="lever"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="col s6">
+        <div class="switch">
+            <p>Dela på Twitter</p>
+            <label>
+                <input type="checkbox" ng-model="share.twitter">
+                <span class="lever"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <form action="#">
+        <div class="file-field input-field col s12">
+            <div class="btn center-align">
+                <span>Lägg till bilder</span>
+                <input type="file" multiple custom-on-change="renderImages">
             </div>
         </div>
-
-        <div class="row">
-            <div class="col s6">
-                <div class="switch">
-                    <p>Dela på Facebook</p>
-                    <label>
-                        <input type="checkbox" ng-model="share.fb">
-                        <span class="lever"></span>
-                    </label>
-                </div>
-            </div>
-
-            <div class="col s6">
-                <div class="switch">
-                    <p>Dela på Twitter</p>
-                    <label>
-                        <input type="checkbox" ng-model="share.twitter">
-                        <span class="lever"></span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <form action="#">
-                <div class="file-field input-field col s12">
-                    <div class="btn center-align">
-                        <span>Lägg till bilder</span>
-                        <input type="file" multiple custom-on-change="renderImages">
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="row">
-            <spin when="renderingImages"></spin>
-            <div class="col s12" ng-if="post.images.length > 0">
-                <label>Bilder</label>
-            </div>
-            <div class="col s6 m4" ng-repeat="image in images track by $index">
-                <div class="card">
-                    <div class="card-image"><img ng-src="{{ image }}"></div>
-                    <div class="card-action"><a ng-click="removePhoto($index)">Ta bort</a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
-                <a ng-class="{ disabled: newPostForm.$invalid }" ng-click="newPostForm.$invalid || submitPost()" class="waves-effect waves-light btn left"><i class="material-icons left">send</i>Posta</a>
-            </div>
-        </div>
-
     </form>
+</div>
+
+<div class="row">
+    <spin when="renderingImages"></spin>
+    <div class="col s12" ng-if="post.images.length > 0">
+        <label>Bilder</label>
+    </div>
+    <div class="col s6 m4" ng-repeat="image in images track by $index">
+        <div class="card">
+            <div class="card-image"><img ng-src="{{ image }}"></div>
+            <div class="card-action"><a ng-click="removePhoto($index)">Ta bort</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <a ng-class="{ disabled: newPostForm.$invalid }" ng-click="newPostForm.$invalid || submitPost()" class="waves-effect waves-light btn left"><i class="material-icons left">send</i>Posta</a>
+    </div>
+</div>
+
+</form>
 </div>
 
 <div id="createPostModal" class="modal bottom-sheet">

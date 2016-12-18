@@ -1,6 +1,6 @@
 /* Angular init */
 var writer = angular.module('writer', ['ui.router', 'angular-loading-bar', 'ngAnalytics', 'ngMap', 'ngFacebook',
-'writer.controllers', 'writer.services', 'writer.filters', 'writer.directives', 'writer.interceptors']);
+    'writer.controllers', 'writer.services', 'writer.filters', 'writer.directives', 'writer.interceptors']);
 
 /* Module setup */
 angular.module('writer.controllers', []);
@@ -17,15 +17,15 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
     $httpProvider, cfpLoadingBarProvider, $urlMatcherFactoryProvider, $facebookProvider) {
         /* Crawler magic */
         $locationProvider.hashPrefix('!');
-        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
 
         // Initialize ngFacebook
-        $facebookProvider.setAppId('1539788846329411');
+        $facebookProvider.setAppId('1606132839695011');
         $facebookProvider.setPermissions('publish_actions');
 
         /* API Base URL */
-        $httpProvider.defaults.base_url = 'https://writercms-core.axelniklasson.se';
-        // $httpProvider.defaults.base_url = 'http://localhost:3000';
+        // $httpProvider.defaults.base_url = 'https://writercms-core.axelniklasson.se';
+        $httpProvider.defaults.base_url = 'http://localhost:3000';
 
         /* Remove spinner */
         cfpLoadingBarProvider.includeSpinner = false;

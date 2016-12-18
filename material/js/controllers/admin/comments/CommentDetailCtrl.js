@@ -2,7 +2,7 @@ var module = angular.module('writer.controllers');
 
 module.controller('AdminCommentDetailCtrl', function($scope, $state, $stateParams,
 	CommentService) {
-		$('.modal-trigger').leanModal();
+		$('.modal-trigger').modal();
 		$scope.loading = true;
 
 		CommentService.getCommentByID($stateParams.id).success(function(response) {

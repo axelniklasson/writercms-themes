@@ -1,6 +1,6 @@
 var module = angular.module('writer.services');
 
-module.factory('LocationService', function($http) {
+module.factory('LocationService', function($http, $facebook) {
     return {
         getCurrentLocation: function() {
             var promise = new Promise(
@@ -20,6 +20,25 @@ module.factory('LocationService', function($http) {
                     };
 
                     navigator.geolocation.getCurrentPosition(success, error, options);
+                }
+            );
+
+            return promise;
+        },
+        findNearbyFBPlaces: function(query) {
+            var self = this;
+            var promise = new Promise(
+                function(resolve, reject) {
+                    self.getCurrentLocation().then(function(location) {
+                        $facebook.api('/search?q=' + query + '&center=' + location.latitude + ',' +
+                            location.longitude + '&distance=1000&type=place&limit=10').then(function(response) {
+                                resolve(response);
+                            }, function(err) {
+                                reject(err);
+                            });
+                    }, function(err) {
+                        reject(err);
+                    });
                 }
             );
 

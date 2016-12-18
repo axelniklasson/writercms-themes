@@ -1,7 +1,7 @@
 var module = angular.module('writer.controllers');
 
 module.controller('AdminUsersDetailCtrl', function($scope, $state, $stateParams, UserService) {
-    $('.modal-trigger').leanModal();
+    $('.modal-trigger').modal();
     $scope.loading = true;
 
     UserService.getUserByID($stateParams.id).success(function(response) {

@@ -4,7 +4,7 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
     $scope.loading = true;
     $scope.placesButtonText = 'Hämta platser igen';
 
-    $('.modal-trigger').leanModal();
+    $('.modal-trigger').modal();
     $('ul.tabs').tabs();
 
     $scope.removePhoto = function(index) {

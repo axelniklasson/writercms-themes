@@ -5,30 +5,30 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
     $scope.share = { fb: true, twitter: false };
     $scope.post = { categories: [], location: "" };
     $scope.placesButtonText = 'Hämta platser igen';
+    $scope.placeQuery = '';
 
     $('ul.tabs').tabs();
-    $('.modal-trigger').leanModal();
+    $('.modal-trigger').modal();
 
     $scope.fetchPlaces = function() {
-        $scope.placesButtonText = 'Hämtar platser ...';
-        LocationService.getCurrentLocation().then(function(location) {
-            var geocoder = new google.maps.Geocoder;
-            var latLng = {
-                lat: location.latitude,
-                lng: location.longitude
-            }
+        $scope.fetchingPlaces = true;
 
-            geocoder.geocode({'location': latLng}, function(results, status) {
-                $scope.$apply($scope.nearbyPlaces = results);
+        LocationService.findNearbyFBPlaces($scope.placeQuery).then(function(response) {
+            var places = {};
+            angular.forEach(response.data, function(place) {
+                places[place.name] = null;
             });
-            $scope.placesButtonText = 'Hämta platser igen';
-        }).catch(function(err) {
-            console.log(err);
-            $scope.placesButtonText = 'Hämta platser igen';
+
+            $('input.autocomplete').autocomplete({
+                data: places
+            });
+            $scope.fetchingPlaces = false;
+        }, function(err) {
             Materialize.toast('Kunde inte hämta platser!', 2000);
+            console.log(err);
+            $scope.fetchingPlaces = false;
         });
     }
-
     $scope.fetchPlaces();
 
     $scope.loadingCategories = true;
@@ -95,10 +95,7 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                     var payload = {
                         message: 'Nytt blogginlägg!',
                         link: window.location.origin + '/posts/' +
-                                response.year + '/' + response.month + '/' + response.slug,
-                        privacy: {
-                            value: 'SELF'
-                        }
+                        response.year + '/' + response.month + '/' + response.slug
                     };
 
                     $facebook.api('/me/feed', 'post', payload).then(function(response) {
@@ -109,7 +106,7 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                         $scope.uploadingPost = false;
                     });
                 } else {
-                    $scope.uploadingPost = true;
+                    $scope.uploadingPost = false;
                 }
             }).error(function(err) {
                 console.log(err);
