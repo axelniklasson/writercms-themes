@@ -1,14 +1,6 @@
 var module = angular.module('writer.services');
 
 module.factory('SocialService', function($http, $facebook, $rootScope, LocalStorageService) {
-    // $rootScope.$on('fb.auth.sessionChange', function(event, response, FB) {
-    //     console.log(response);
-    // });
-    //
-    // $rootScope.$on('fb.auth.statusChange', function(event, response, FB) {
-    //     console.log(response);
-    // });
-
     return {
         getInstaFeed: function(username) {
             var req = {
