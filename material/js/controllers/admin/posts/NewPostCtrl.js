@@ -2,7 +2,7 @@ var module = angular.module('writer.controllers');
 
 module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, CategoryService, LocationService, PostService, ImageService, $facebook) {
     $scope.images = [];
-    $scope.share = { fb: true, twitter: false };
+    $scope.share = { fb: false, twitter: false };
     $scope.post = { categories: [], location: "" };
     $scope.placesButtonText = 'Hämta platser igen';
     $scope.fetchPlacesFromFB = true;
@@ -105,19 +105,23 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                 };
             }
 
+            // Know where post is created
+            post.postToTwitter = $scope.share.twitter;
+
             PostService.createPost(post).success(function(response) {
                 $scope.post = {};
                 $scope.images = [];
 
+                // Share post to FB
                 if ($scope.share.fb) {
                     // Share post to FB
                     var payload = {
-                        message: 'Nytt blogginlägg!',
                         link: window.location.origin + '/posts/' +
                         response.year + '/' + response.month + '/' + response.slug
                     };
 
-                    if ($scope.fetchPlacesFromFB && post.location) {
+                    // Attach FB place when publishing post
+                    if ($scope.fetchPlacesFromFB && post.location && post.location.id) {
                         payload.place = post.location.id;
                     }
 

@@ -18,16 +18,6 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
                 url: $scope.post.images[0]
             };
             $scope.$emit('newPageLoaded', metadata);
-
-            var image = new Image();
-            image.addEventListener('load', function() {
-                metadata.image.width = this.naturalWidth;
-                metadata.image.height = this.naturalHeight;
-
-                $scope.$emit('newPageLoaded', metadata);
-                $scope.loading = false;
-            });
-            image.src = metadata.image.url;
         } else {
             $scope.$emit('newPageLoaded', metadata);
             $scope.loading = false;
