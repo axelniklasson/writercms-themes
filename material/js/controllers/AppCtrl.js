@@ -75,9 +75,9 @@ module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, Aut
         location.reload(); // TODO fix this
     }
 
-    DashboardService.getVersion().success(function(response) {
-        $scope.versionHash = response.object.sha.substring(0, 7);
-    }).error(function(err) {
-        console.log(err);
-    });
+    // DashboardService.getVersion().success(function(response) {
+    //     $scope.versionHash = response.object.sha.substring(0, 7);
+    // }).error(function(err) {
+    //     console.log(err);
+    // });
 });
