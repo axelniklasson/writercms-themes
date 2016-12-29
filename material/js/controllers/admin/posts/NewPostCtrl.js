@@ -109,23 +109,28 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
             author: localStorage.getItem('userID'), categories: $scope.post.categories,
             youtube: $scope.post.youtube };
 
+            post.location = {};
+
             if ($scope.fetchPlacesFromFB) {
                 if ($scope.fbPlaces) {
-                    post.location = $scope.fbPlaces[$('#fbLocationInput').val()];
+                    var fbPlace = $scope.fbPlaces[$('#fbLocationInput').val()]
+                    post.location = {
+                        latitude: fbPlace.location.latitude,
+                        longitude: fbPlace.location.longitude,
+                        name: fbPlace.location.name,
+                    };
                 } else {
-                    post.location = {};
+                    post.location = null;
                 }
             } else {
                 if ($scope.customLocation.longitude && $scope.customLocation.latitude) {
                     post.location = {
                         name: $scope.customLocation.name,
-                        location: {
-                            latitude: $scope.customLocation.latitude,
-                            longitude: $scope.customLocation.longitude
-                        }
+                        latitude: $scope.customLocation.latitude,
+                        longitude: $scope.customLocation.longitude
                     };
                 } else {
-                    post.location = {};
+                    post.location = null;
                 }
             }
 

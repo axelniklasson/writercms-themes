@@ -24,7 +24,7 @@
 
         <div class="row feed" ng-if="!instaFeedError">
             <h4 class="heading" class="center-aligned">Det senaste från Instagram</h4>
-            <spin when="loadingFeed"></spin>
+            <spin when="instaFeed.loading.axel || instaFeed.loading.martin"></spin>
             <div class="col s12" ng-if="!loadingFeed">
                 <div class="row">
                     <div class="col s12 m4 wrapper" ng-repeat="post in feed" ng-class="{ active: hover }" ng-mouseenter="hover = true" ng-mouseleave="hover = false">

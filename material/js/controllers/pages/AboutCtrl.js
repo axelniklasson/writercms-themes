@@ -2,7 +2,15 @@ var module = angular.module('writer.controllers');
 
 module.controller('AboutCtrl', function($scope, UserService, SocialService) {
     $scope.loading = true;
-    $scope.loadingFeed = true;
+    $scope.loading = true;
+    $scope.instaFeed = {
+        axel: [],
+        martin: [],
+        loading: {
+            axel: true,
+            martin: true
+        }
+    };
 
     UserService.getAllUsers().success(function(response) {
         $scope.loading = false;
@@ -15,12 +23,38 @@ module.controller('AboutCtrl', function($scope, UserService, SocialService) {
 
 
     SocialService.getInstaFeed('axel.niklasson').success(function(response){
-        $scope.feed = response;
-        $scope.loadingFeed = false;
+        $scope.instaFeed.axel = response;
+        $scope.instaFeed.loading.axel = false;
     }).error(function(err) {
-        $scope.loadingFeed = false;
+        $scope.instaFeed.loading.axel = false;
         $scope.instaFeedError = true;
     });
+
+    SocialService.getInstaFeed('martinliden').success(function(response){
+        $scope.instaFeed.martin = response;
+        $scope.instaFeed.loading.martin = false;
+    }).error(function(err) {
+        $scope.instaFeed.loading.martin = false;
+        $scope.instaFeedError = true;
+    });
+
+    $scope.$watch('instaFeed.loading', function(newVal, oldVal) {
+        if (newVal != oldVal && (!newVal.axel && !newVal.martin)) {
+            // All feeds fetched. Merge arrays and sort
+            $scope.feed = angular.copy($scope.instaFeed.axel);
+            for (var i = 0; i < $scope.instaFeed.martin.length; i++) {
+                var martin = $scope.instaFeed.martin[i];
+
+                for (var j = 0; j < $scope.feed.length; j++) {
+                    if (moment(martin.created_time, 'x').isAfter(moment($scope.feed[j].created_time, 'x'))) {
+                        $scope.feed.splice(j, 0, martin);
+                        console.log(j);
+                        break;
+                    }
+                }
+            }
+        }
+    }, true)
 
     $scope.$emit('newPageLoaded', {
         title: 'Om oss',

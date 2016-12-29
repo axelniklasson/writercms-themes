@@ -24,6 +24,14 @@ img {
 	z-index: 999;
 }
 
+.side-nav .collapsible li, .side-nav.fixed .collapsible li {
+	padding: 3px;
+
+	a {
+		font-weight: 400;
+	}
+}
+
 #sidenav-overlay {
 	z-index: 995;
 }
