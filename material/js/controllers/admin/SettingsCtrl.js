@@ -15,6 +15,9 @@ module.controller('SettingsCtrl', function($rootScope, $scope, SettingsService) 
             }
         });
 
+        setTimeout(function () {
+            $('textarea').trigger('autoresize');
+        });
         $scope.loading = false;
     }).error(function(err) {
         $scope.loading = false;

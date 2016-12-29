@@ -46,6 +46,21 @@
 
     <div class="row">
         <div class="col s12">
+            <h5>Footer</h5>
+        </div>
+
+        <div class="input-field col s12 m6">
+            <textarea id="footer" class="materialize-textarea" ng-blur="saveSetting('footerText')" ng-model="settings.footerText"></textarea>
+            <label ng-class="{ active: settings.footerText != '' }" for="footer">Footertext</label>
+        </div>
+        <div class="col s12 m6">
+            <label for="footerTextResult">Footertext - resultat</label>
+            <div id="footerTextResult" ng-bind-html="settings.footerText | markdown | trust"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
             <h5>Länder</h5>
             <p>Naturligtvis kan man använda sig av Markdown i beskrivning av länderna.</p>
         </div>

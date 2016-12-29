@@ -129,17 +129,8 @@
     <footer class="page-footer" ng-show="showFooter && settings.showFooter" ng-cloak>
         <div class="container">
             <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Asien 2017</h5>
-                    <p class="grey-text text-lighten-4">
-                        En reseblogg som kommer användas under ett halvårs backpacking i Sydostasien under 2017.
-                        Vi heter Axel Niklasson och Martin Lidén och vi kommer skriva av oss här när vi har tid (och Wi-Fi).
-                    </p>
-                    <p class="grey-text text-lighten-4">
-                        Hemsidan använder sig av WriterCMS, som är ett helt egenutvecklat bloggsystem byggt av Axel och
-                        vi kan tyvärr därför inte garantera en 100% buggfri upplevelse. Mer information om verktyget WriterCMS kan
-                        man hitta <a class="inverted" href="#">här</a>.
-                    </p>
+                <div class="col l6 s12 content">
+                    <div ng-bind-html="settings.footerText | markdown | trust"></div>
                 </div>
 
                 <div class="col l6 s12" ng-show="settings.showCountdown">

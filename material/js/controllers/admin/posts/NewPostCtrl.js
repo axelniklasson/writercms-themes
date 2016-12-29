@@ -6,33 +6,11 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
     $scope.post = { categories: [], location: "" };
     $scope.placesButtonText = 'Hämta platser igen';
     $scope.fetchPlacesFromFB = true;
+    $scope.locationError = false;
     $scope.customLocation = {};
 
     $('ul.tabs').tabs();
     $('.modal').modal();
-
-    $scope.fetchPlaces = function() {
-        $scope.fetchingPlaces = true;
-
-        LocationService.findNearbyFBPlaces().then(function(response) {
-            var places = {};
-            $scope.fbPlaces = {};
-            angular.forEach(response.data, function(place) {
-                places[place.name] = null;
-                $scope.fbPlaces[place.name] = place;
-            });
-
-            $scope.fetchingPlaces = false;
-            $('input.autocomplete').autocomplete({
-                data: places
-            });
-        }, function(err) {
-            Materialize.toast('Kunde inte hämta platser!', 2000);
-            console.log(err);
-            $scope.fetchingPlaces = false;
-        });
-    }
-    $scope.fetchPlaces();
 
     $scope.loadingCategories = true;
     CategoryService.getAllCategories().success(function(response) {
@@ -73,17 +51,54 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
         }
     }
 
+    $scope.fetchLocation = function() {
+        $scope.fetchingPlaces = true;
+        LocationService.getCurrentLocation().then(function(response) {
+            $scope.customLocation.latitude = response.latitude;
+            $scope.customLocation.longitude = response.longitude;
+            $scope.fetchingPlaces = false;
+            $scope.locationError = false;
+        }, function(err) {
+            console.log(err);
+            $scope.locationError = true;
+            $scope.fetchingPlaces = false;
+        });
+    }
+
+    $scope.fetchFBPlaces = function() {
+        $scope.fetchingPlaces = true;
+        LocationService.findNearbyFBPlaces().then(function(response) {
+            var places = {};
+            $scope.fbPlaces = {};
+            angular.forEach(response.data, function(place) {
+                places[place.name] = null;
+                $scope.fbPlaces[place.name] = place;
+            });
+
+            $scope.fetchingPlaces = false;
+            $('input.autocomplete').autocomplete({
+                data: places
+            });
+            $scope.locationError = false;
+        }, function(err) {
+            Materialize.toast('Kunde inte hämta platser!', 2000);
+            $scope.locationError = true;
+            console.log(err);
+            $scope.fetchingPlaces = false;
+        });
+    }
+    // Do on load
+    $scope.fetchFBPlaces();
+
+    $scope.retryPlacesFetching = function() {
+        $scope.social.fb.authenticated ? $scope.fetchFBPlaces() : $scope.fetchLocation()
+    }
+
     $scope.$watch('fetchPlacesFromFB', function(newVal, oldVal) {
         if (newVal != oldVal && !newVal) {
-            $scope.fetchingPlaces = true;
-            LocationService.getCurrentLocation().then(function(response) {
-                $scope.customLocation.latitude = response.latitude;
-                $scope.customLocation.longitude = response.longitude;
-                $scope.fetchingPlaces = false;
-            }, function(err) {
-                console.log(err);
-                $scope.fetchingPlaces = false;
-            });
+            $scope.fetchLocation();
+        } else if (newVal != oldVal && newVal) {
+            $scope.fetchFBPlaces();
         }
     });
 
@@ -91,18 +106,27 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
         $scope.uploadingPost = true;
         $('#createPostModal').modal('open');
         var post = { title: $scope.post.title, content: $scope.post.content, images: $scope.images,
-            author: localStorage.getItem('userID'), categories: $scope.post.categories };
+            author: localStorage.getItem('userID'), categories: $scope.post.categories,
+            youtube: $scope.post.youtube };
 
             if ($scope.fetchPlacesFromFB) {
-                post.location = $scope.fbPlaces[$('#fbLocationInput').val()];
+                if ($scope.fbPlaces) {
+                    post.location = $scope.fbPlaces[$('#fbLocationInput').val()];
+                } else {
+                    post.location = {};
+                }
             } else {
-                post.location = {
-                    name: $scope.customLocation.name,
-                    location: {
-                        latitude: $scope.customLocation.latitude,
-                        longitude: $scope.customLocation.longitude
-                    }
-                };
+                if ($scope.customLocation.longitude && $scope.customLocation.latitude) {
+                    post.location = {
+                        name: $scope.customLocation.name,
+                        location: {
+                            latitude: $scope.customLocation.latitude,
+                            longitude: $scope.customLocation.longitude
+                        }
+                    };
+                } else {
+                    post.location = {};
+                }
             }
 
             // Know where post is created
