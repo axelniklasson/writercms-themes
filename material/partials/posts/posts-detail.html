@@ -42,6 +42,11 @@
     </div>
 
     <div ng-show="!editing" class="post-content" ng-bind-html="post.content | markdown | trust"></div>
+
+    <div ng-show="!editing" ng-if="post.youtube">
+        <youtube id="post.youtube"></youtube>
+    </div>
+
     <div class="post-images" ng-repeat="image in post.images track by $index">
         <img image-lazy-load="{{ image }}" image-index="$index">
     </div>
@@ -57,7 +62,7 @@
         <div class="post-location" ng-if="post.location.name">
             <i class="fa fa-map-marker"></i><span> {{ post.location.name }}</span>
         </div>
-        
+
         <ul class="collapsible post-comments" data-collapsible="accordion" ng-show="post.comments.length > 0">
             <li ng-repeat="comment in post.comments">
                 <div class="collapsible-header"><i class="fa fa-user"></i>{{ comment.userName }}<span class="right">{{ comment.date | shortDate}}</span></div>

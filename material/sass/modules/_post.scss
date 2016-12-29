@@ -129,6 +129,12 @@
     .editField {
         margin: 15px auto;
     }
+
+    iframe.youtube {
+        width: 80%;
+        height: 300px;
+        margin-bottom: 50px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -161,6 +167,12 @@
             font-size: 125%;
         }
 
+        iframe.youtube {
+            width: 100%;
+            min-height: 400px;
+            margin: auto;
+            margin-bottom: 50px;
+        }
     }
 
 }
