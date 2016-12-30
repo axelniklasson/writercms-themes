@@ -21,22 +21,29 @@ module.controller('AboutCtrl', function($rootScope, $scope, UserService, SocialS
         console.log(err);
     });
 
-
-    SocialService.getInstaFeed($rootScope.settings.instagramUser1).success(function(response){
-        $scope.instaFeed.axel = response;
-        $scope.instaFeed.loading.axel = false;
-    }).error(function(err) {
-        $scope.instaFeed.loading.axel = false;
-        $scope.instaFeedError = true;
+    $rootScope.$watchGroup(['settings.instagramUser1', 'settings.instagramUser2'], function(newValues, oldValues) {
+        if (newValues[0] != undefined && newValues[1] != undefined) {
+            $scope.getInstaFeedData();
+        }
     });
 
-    SocialService.getInstaFeed($rootScope.settings.instagramUser2).success(function(response){
-        $scope.instaFeed.martin = response;
-        $scope.instaFeed.loading.martin = false;
-    }).error(function(err) {
-        $scope.instaFeed.loading.martin = false;
-        $scope.instaFeedError = true;
-    });
+    $scope.getInstaFeedData = function() {
+        SocialService.getInstaFeed($rootScope.settings.instagramUser1).success(function(response){
+            $scope.instaFeed.axel = response;
+            $scope.instaFeed.loading.axel = false;
+        }).error(function(err) {
+            $scope.instaFeed.loading.axel = false;
+            $scope.instaFeedError = true;
+        });
+
+        SocialService.getInstaFeed($rootScope.settings.instagramUser2).success(function(response){
+            $scope.instaFeed.martin = response;
+            $scope.instaFeed.loading.martin = false;
+        }).error(function(err) {
+            $scope.instaFeed.loading.martin = false;
+            $scope.instaFeedError = true;
+        });    
+    }
 
     $scope.$watch('instaFeed.loading', function(newVal, oldVal) {
         if (newVal != oldVal && (!newVal.axel && !newVal.martin)) {
