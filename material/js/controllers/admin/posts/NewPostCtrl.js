@@ -114,11 +114,15 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
             if ($scope.fetchPlacesFromFB) {
                 if ($scope.fbPlaces) {
                     var fbPlace = $scope.fbPlaces[$('#fbLocationInput').val()]
-                    post.location = {
-                        latitude: fbPlace.location.latitude,
-                        longitude: fbPlace.location.longitude,
-                        name: fbPlace.name,
-                    };
+                    if (fbPlace.location && fbPlace.name) {
+                        post.location = {
+                            latitude: fbPlace.location.latitude,
+                            longitude: fbPlace.location.longitude,
+                            name: fbPlace.name,
+                        };
+                    } else {
+                        post.location = null;
+                    }
                 } else {
                     post.location = null;
                 }
