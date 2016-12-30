@@ -117,7 +117,7 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                     post.location = {
                         latitude: fbPlace.location.latitude,
                         longitude: fbPlace.location.longitude,
-                        name: fbPlace.location.name,
+                        name: fbPlace.name,
                     };
                 } else {
                     post.location = null;

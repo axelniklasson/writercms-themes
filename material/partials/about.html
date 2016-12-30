@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="row feed" ng-if="!instaFeedError">
+        <div class="row feed" ng-if="!instaFeedError && feed.length > 0">
             <h4 class="heading" class="center-aligned">Det senaste från Instagram</h4>
             <spin when="instaFeed.loading.axel || instaFeed.loading.martin"></spin>
             <div class="col s12" ng-if="!loadingFeed">

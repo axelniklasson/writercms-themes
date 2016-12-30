@@ -6,6 +6,7 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
 
     PostService.getPostByTimeAndSlug($stateParams.year, $stateParams.month, $stateParams.slug).success(function(response) {
         $scope.post = response;
+        $scope.loading = false;
         $scope.post.hasLiked = LocalStorageService.hasLikedPost($scope.post._id);
         var metadata = {
             title: $scope.post.title,
@@ -20,7 +21,6 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
             $scope.$emit('newPageLoaded', metadata);
         } else {
             $scope.$emit('newPageLoaded', metadata);
-            $scope.loading = false;
         }
 
         // Initialize comments collapsible in timeout for some reason
