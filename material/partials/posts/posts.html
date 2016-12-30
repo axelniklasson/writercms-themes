@@ -62,8 +62,8 @@
                     {{ category.name }}
                 </div>
 
-                <div class="post-location" ng-if="post.location">
-                    <i class="fa fa-map-marker"></i><span> {{ post.location.name }}</span>
+                <div class="post-location" ng-if="post.location.name">
+                    <i class="material-icons prefix">place</i> <span>{{ post.location.name }}</span>
                 </div>
 
                 <ul class="collapsible post-comments" data-collapsible="accordion" ng-show="post.comments.length > 0">

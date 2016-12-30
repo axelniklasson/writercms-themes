@@ -13,69 +13,78 @@
     <div class="row">
         <form name="editProfileForm">
             <div class="col s12 m10 offset-m1 l10 offset-l1">
+                <div class="col s12">
+                    <h4>Min profil</h4>
+                </div>
                 <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">account_circle</i>
                     <input ng-required="true" ng-model="user.firstName" type="text" class="validate" id="user_firstName">
                     <label ng-class="{ active: user.firstName != '' }" for="user_firstName">Förnamn</label>
                 </div>
 
                 <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">account_circle</i>
                     <input ng-required="true" ng-model="user.lastName" type="text" class="validate" id="user_lastName">
                     <label ng-class="{ active: user.lastName != '' }" for="user_lastName">Efternamn</label>
                 </div>
 
                 <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">person</i>
                     <input ng-required="true" ng-model="user.username" type="text" class="validate" id="user_username">
                     <label ng-class="{ active: user.username != '' }" for="user_username">Användarnamn</label>
                 </div>
 
                 <div class="input-field col s12 m6">
+                    <i class="material-icons prefix">email</i>
                     <input ng-required="true" ng-model="user.email" type="email" class="validate" id="user_email">
                     <label ng-class="{ active: user.email != '' }" for="user_email">E-post</label>
                 </div>
 
                 <div class="input-field col s12">
+                    <i class="material-icons prefix">format_quote</i>
                     <textarea id="user_bio" ng-model="user.bio" class="materialize-textarea"></textarea>
                     <label ng-class="{ active: user.bio != '' }" for="user_bio">Beskrivning</label>
                 </div>
 
                 <div class="row">
-                    <div class="col s12">
-                        <h6>Sociala nätverk</h6>
-                    </div>
+                    <div class="col s12 m6">
+                        <h4>Facebook</h4>
+                        <div class="row">
+                            <div class="col s12" ng-if="social.fb.loading">
+                                <spin when="social.fb.loading"></spin>
+                            </div>
 
-                    <div class="col s12 m6" ng-if="social.fb.loading">
-                        <spin when="social.fb.loading"></spin>
-                    </div>
+                            <div class="col s12" ng-if="!social.fb.loading">
+                                <div class="chip" ng-if="!social.fb.authenticated" ng-click="fbLogIn()">
+                                    <img src="img/fb.png">
+                                    Koppla till Facebook
+                                </div>
 
-                    <div class="col s12 m6" ng-if="!social.fb.loading">
-                        <p>Facebook</p>
-                        <div class="chip" ng-if="!social.fb.authenticated" ng-click="fbLogIn()">
-                            <img src="img/fb.png">
-                            Koppla till Facebook
+                                <div class="chip" ng-if="social.fb.authenticated">
+                                    <img ng-src="{{ social.fb.user.picture }}">
+                                    {{ social.fb.user.name }}
+                                    <i class="close material-icons" ng-click="fbLogOut()">close</i>
+                                </div>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="chip" ng-if="social.fb.authenticated">
-                            <img ng-src="{{ social.fb.user.picture }}">
-                            {{ social.fb.user.name }}
-                            <i class="close material-icons" ng-click="fbLogOut()">close</i>
+                    <div class="col s12 m6">
+                        <h4>Notiser</h4>
+                        <div class="switch">
+                            <label>
+                                Ta inte emot
+                                <input type="checkbox" ng-model="user.receiveNotifications">
+                                <span class="lever"></span>
+                                Ta emot
+                            </label>
                         </div>
                     </div>
                 </div>
 
-                <div class="col s12">
-                    <div class="switch">
-                        <p>Notiser</p>
-                        <label>
-                            Ta inte emot
-                            <input type="checkbox" ng-model="user.receiveNotifications">
-                            <span class="lever"></span>
-                            Ta emot
-                        </label>
-                    </div>
-                </div>
-
-                <div ng-if="user.profilePic" class="col s6">
-                    <p>Profilbild</p>
+                <div ng-if="user.profilePic" class="col s12 m6">
+                    <h4>Profilbild</h4>
+                    <p>Det är rekommenderat att ladda upp en kvadratisk profilbild.</p>
                     <div class="card">
                         <div class="card-image">
                             <img ng-src="{{ user.profilePic }}">

@@ -108,7 +108,7 @@
 
         <div class="row" ng-show="!loading">
             <div class="col s12">
-                <a ng-class="{ disabled: editPostForm.$invalid }" ng-click="editPostForm.$invalid || updatePost()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
+                <a ng-class="{ disabled: (editPostForm.$invalid || post.categories.length == 0) }" ng-click="editPostForm.$invalid || updatePost()" class="waves-effect waves-light btn left"><i class="material-icons left">edit</i>Spara</a>
                 <a data-target="confirmDeleteModal" class="modal-trigger waves-effect waves-light btn right red lighten-1"><i class="material-icons left">delete</i>Ta bort</a>
             </div>
         </div>

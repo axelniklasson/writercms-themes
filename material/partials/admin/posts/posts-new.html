@@ -135,7 +135,7 @@
 
         <div class="row">
             <div class="col s12">
-                <a ng-class="{ disabled: newPostForm.$invalid }" ng-click="newPostForm.$invalid || submitPost()" class="waves-effect waves-light btn left"><i class="material-icons left">send</i>Posta</a>
+                <a ng-class="{ disabled: (newPostForm.$invalid || post.categories.length == 0) }" ng-click="newPostForm.$invalid || submitPost()" class="waves-effect waves-light btn left"><i class="material-icons left">send</i>Posta</a>
             </div>
         </div>
 

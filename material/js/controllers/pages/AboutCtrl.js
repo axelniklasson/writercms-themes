@@ -1,6 +1,6 @@
 var module = angular.module('writer.controllers');
 
-module.controller('AboutCtrl', function($scope, UserService, SocialService) {
+module.controller('AboutCtrl', function($rootScope, $scope, UserService, SocialService) {
     $scope.loading = true;
     $scope.loading = true;
     $scope.instaFeed = {
@@ -22,7 +22,7 @@ module.controller('AboutCtrl', function($scope, UserService, SocialService) {
     });
 
 
-    SocialService.getInstaFeed('axel.niklasson').success(function(response){
+    SocialService.getInstaFeed($rootScope.settings.instagramUser1).success(function(response){
         $scope.instaFeed.axel = response;
         $scope.instaFeed.loading.axel = false;
     }).error(function(err) {
@@ -30,7 +30,7 @@ module.controller('AboutCtrl', function($scope, UserService, SocialService) {
         $scope.instaFeedError = true;
     });
 
-    SocialService.getInstaFeed('martinliden').success(function(response){
+    SocialService.getInstaFeed($rootScope.settings.instagramUser2).success(function(response){
         $scope.instaFeed.martin = response;
         $scope.instaFeed.loading.martin = false;
     }).error(function(err) {
@@ -48,7 +48,6 @@ module.controller('AboutCtrl', function($scope, UserService, SocialService) {
                 for (var j = 0; j < $scope.feed.length; j++) {
                     if (moment(martin.created_time, 'x').isAfter(moment($scope.feed[j].created_time, 'x'))) {
                         $scope.feed.splice(j, 0, martin);
-                        console.log(j);
                         break;
                     }
                 }
