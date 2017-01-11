@@ -74,10 +74,4 @@ module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, Aut
         AuthService.logOut();
         location.reload(); // TODO fix this
     }
-
-    // DashboardService.getVersion().success(function(response) {
-    //     $scope.versionHash = response.object.sha.substring(0, 7);
-    // }).error(function(err) {
-    //     console.log(err);
-    // });
 });

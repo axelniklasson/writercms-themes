@@ -83,6 +83,10 @@ module.controller('AdminPostDetailCtrl', function($scope, $state, $stateParams, 
             $scope.post.categories[index] = category._id;
         });
         $scope.loading = false;
+
+        setTimeout(function () {
+            $('textarea').trigger('autoresize');
+        });
     }).error(function(err) {
         $scope.post = {};
         $scope.loading = false;

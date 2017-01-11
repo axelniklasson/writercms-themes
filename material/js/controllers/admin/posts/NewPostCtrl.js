@@ -113,13 +113,13 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
 
             if ($scope.fetchPlacesFromFB) {
                 if ($scope.fbPlaces) {
-                    var fbPlace = $scope.fbPlaces[$('#fbLocationInput').val()]
-                    if (fbPlace) {
-                        if (fbPlace.location && fbPlace.name) {
+                    $scope.stashedFBPlace = $scope.fbPlaces[$('#fbLocationInput').val()]
+                    if ($scope.stashedFBPlace) {
+                        if ($scope.stashedFBPlace.location && $scope.stashedFBPlace.name) {
                             post.location = {
-                                latitude: fbPlace.location.latitude,
-                                longitude: fbPlace.location.longitude,
-                                name: fbPlace.name,
+                                latitude: $scope.stashedFBPlace.location.latitude,
+                                longitude: $scope.stashedFBPlace.location.longitude,
+                                name: $scope.stashedFBPlace.name,
                             };
                         } else {
                             post.location = null;
@@ -158,8 +158,8 @@ module.controller('NewPostCtrl', function($scope, $stateParams, $timeout, Catego
                     };
 
                     // Attach FB place when publishing post
-                    if ($scope.fetchPlacesFromFB && post.location && post.location.id) {
-                        payload.place = post.location.id;
+                    if ($scope.fetchPlacesFromFB && post.location && $scope.stashedFBPlace.id) {
+                        payload.place = $scope.stashedFBPlace.id;
                     }
 
                     $facebook.api('/me/feed', 'post', payload).then(function(response) {

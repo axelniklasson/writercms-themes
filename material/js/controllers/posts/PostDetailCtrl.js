@@ -6,7 +6,6 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
 
     PostService.getPostByTimeAndSlug($stateParams.year, $stateParams.month, $stateParams.slug).success(function(response) {
         $scope.post = response;
-        console.log(response)
         $scope.loading = false;
         $scope.post.hasLiked = LocalStorageService.hasLikedPost($scope.post._id);
         var metadata = {
@@ -14,15 +13,10 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
             description: $scope.post.content,
             author: $scope.post.author.firstName + ' ' + $scope.post.author.lastName
         };
+        // Fallback image
+        $scope.post.images.length > 0 ? metadata.image.url = $scope.post.images[0] : metadata.image.url = 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg';
+        $scope.$emit('newPageLoaded', metadata);
 
-        if ($scope.post.images.length > 0) {
-            metadata.image = {
-                url: $scope.post.images[0]
-            };
-            $scope.$emit('newPageLoaded', metadata);
-        } else {
-            $scope.$emit('newPageLoaded', metadata);
-        }
 
         // Initialize comments collapsible in timeout for some reason
         setTimeout(function() { $('.collapsible').collapsible(); }, 0);

@@ -7,6 +7,10 @@ module.controller('ProfileCtrl', function($scope, UserService, ImageService, Soc
     UserService.getProfileData().success(function(response) {
         $scope.user = response;
         $scope.loading = false;
+
+        setTimeout(function () {
+            $('textarea').trigger('autoresize');
+        });
     }).error(function(err) {
         $scope.loading = false;
     })

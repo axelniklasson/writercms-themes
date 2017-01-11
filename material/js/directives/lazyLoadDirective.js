@@ -8,7 +8,7 @@ module.directive('lazyLoad', function($rootScope, PostService, LocalStorageServi
             var skip = 0;
             var fetchedAll = false;
 
-            function fetchPosts() {
+            function fetch() {
                 options.dataSet == null ? $scope.loading = true : $scope.lazyLoading = true;
 
                 options.fetcher(skip, options.take).success(function(response) {
@@ -41,17 +41,16 @@ module.directive('lazyLoad', function($rootScope, PostService, LocalStorageServi
 
             // Register scroll listener and fetch 5 more posts when last post is in focus
             function lazyLoad() {
-                var scrollPosition = window.pageYOffset;
-                var windowSize = window.innerHeight;
-                var bodyHeight = document.body.offsetHeight;
-                var distance = Math.max(bodyHeight - (scrollPosition + windowSize), 0);
+                var listHeight = $(element).parent().height();
+                var scroll = window.pageYOffset;
+                var distance = listHeight - (window.innerHeight + scroll);
 
                 // Paginate, remove listener and fetch new posts
-                if (distance < 200 && !fetchedAll) {
+                if (distance < 0 && !fetchedAll) {
                     skip += options.take;
                     document.removeEventListener('scroll', lazyLoad);
-                    fetchPosts();
-                } else if (distance >= 200 && !fetchedAll) {
+                    fetch();
+                } else if (distance >= 0 && !fetchedAll) {
                     $scope.loading = false;
                     document.addEventListener('scroll', lazyLoad);
                 }
@@ -69,7 +68,7 @@ module.directive('lazyLoad', function($rootScope, PostService, LocalStorageServi
                 document.removeEventListener('scroll', lazyLoad);
             });
 
-            fetchPosts();
+            fetch();
         }
     };
 });
