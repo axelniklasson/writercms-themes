@@ -42,7 +42,7 @@ module.controller('AboutCtrl', function($rootScope, $scope, UserService, SocialS
         }).error(function(err) {
             $scope.instaFeed.loading.martin = false;
             $scope.instaFeedError = true;
-        });    
+        });
     }
 
     $scope.$watch('instaFeed.loading', function(newVal, oldVal) {
@@ -67,9 +67,7 @@ module.controller('AboutCtrl', function($rootScope, $scope, UserService, SocialS
         description: 'Vilka är vi egentligen? Här kan man läsa mer om oss som driver bloggen.',
         author: 'Axel Niklasson',
         image: {
-            url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg',
-            width: 1024,
-            height: 683
+            url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg'
         }
     });
 });

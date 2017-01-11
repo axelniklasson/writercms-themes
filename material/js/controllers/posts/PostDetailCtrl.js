@@ -11,12 +11,17 @@ module.controller('PostDetailCtrl', function($scope, $stateParams, PostService, 
         var metadata = {
             title: $scope.post.title,
             description: $scope.post.content,
-            author: $scope.post.author.firstName + ' ' + $scope.post.author.lastName
+            author: $scope.post.author.firstName + ' ' + $scope.post.author.lastName,
+            image: {
+                url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg'
+            }
         };
-        // Fallback image
-        $scope.post.images.length > 0 ? metadata.image.url = $scope.post.images[0] : metadata.image.url = 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg';
-        $scope.$emit('newPageLoaded', metadata);
 
+        // Fallback image
+        if ($scope.post.images.length > 0) {
+             metadata.image.url = $scope.post.images[0];
+        }
+        $scope.$emit('newPageLoaded', metadata);
 
         // Initialize comments collapsible in timeout for some reason
         setTimeout(function() { $('.collapsible').collapsible(); }, 0);

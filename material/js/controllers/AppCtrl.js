@@ -41,9 +41,7 @@ module.controller('AppCtrl', function($rootScope, $scope, $facebook, $state, Aut
         description: 'Upplevelser och bilder från två backpackers på vift.',
         author: 'Axel Niklasson',
         image: {
-            url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg',
-            width: 1024,
-            height: 683
+            url: 'http://66.media.tumblr.com/3dbf290f6477026a098a8369e1d96665/tumblr_mj9jshtzH01qadknpo1_1280.jpg'
         }
     }
 
