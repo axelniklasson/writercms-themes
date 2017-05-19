@@ -109,7 +109,7 @@
                     <div class="card-content">
                         <h4>Senaste inlägget</h4>
                         <p>{{ lastPost.author.firstName }} postade det senaste inlägget,
-                            <a ui-sref="base.postdetail({ id: lastPost._id })">{{ lastPost.title }}</a>, för {{ lastPost.date | timeSince }} sedan.
+                            <a ui-sref="base.postdetail({ year: lastPost.year, month: lastPost.month, slug: lastPost.slug })">{{ lastPost.title }}</a>, för {{ lastPost.date | timeSince }} sedan.
                             Inlägget kategoriserades som
                             <span ng-repeat="cat in lastPost.categories track by $index">
                                 <a ui-sref="base.archive({category: cat._id})">{{ cat.name }}</a><span ng-if="$index < lastPost.categories.length - 2" />,</span><span ng-if="$index == lastPost.categories.length - 2" > och</span><span ng-if="$index == lastPost.categories.length - 1">.</span>
@@ -117,7 +117,7 @@
                         </p>
                     </div>
                     <div class="card-action">
-                        <a ui-sref="base.postdetail({ id: lastPost._id })">Gå till inlägget</a>
+                        <a ui-sref="base.postdetail({ year: lastPost.year, month: lastPost.month, slug: lastPost.slug })">Gå till inlägget</a>
                     </div>
                 </div>
             </div>
