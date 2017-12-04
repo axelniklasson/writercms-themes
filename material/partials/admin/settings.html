@@ -105,6 +105,11 @@
         </div>
 
         <div class="input-field col s12">
+            <textarea id="myanmar" class="materialize-textarea" ng-blur="saveSetting('myanmarText')" ng-model="settings.myanmarText"></textarea>
+            <label ng-class="{ active: settings.myanmarText != '' }" for="myanmar">Myanmar</label>
+        </div>
+
+        <div class="input-field col s12">
             <textarea id="thailand" class="materialize-textarea" ng-blur="saveSetting('thailandText')" ng-model="settings.thailandText"></textarea>
             <label ng-class="{ active: settings.thailandText != '' }" for="thailand">Thailand</label>
         </div>
@@ -115,6 +120,11 @@
         </div>
 
         <div class="input-field col s12">
+            <textarea id="singapore" class="materialize-textarea" ng-blur="saveSetting('singaporeText')" ng-model="settings.singaporeText"></textarea>
+            <label ng-class="{ active: settings.singaporeText != '' }" for="singapore">Singapore</label>
+        </div>
+
+        <div class="input-field col s12">
             <textarea id="philippines" class="materialize-textarea" ng-blur="saveSetting('philippinesText')" ng-model="settings.philippinesText"></textarea>
             <label ng-class="{ active: settings.philippinesText != '' }" for="philippines">Filippinerna</label>
         </div>
@@ -122,11 +132,6 @@
         <div class="input-field col s12">
             <textarea id="indonesia" class="materialize-textarea" ng-blur="saveSetting('indonesiaText')" ng-model="settings.indonesiaText"></textarea>
             <label ng-class="{ active: settings.indonesiaText != '' }" for="indonesia">Indonesien</label>
-        </div>
-
-        <div class="input-field col s12">
-            <textarea id="singapore" class="materialize-textarea" ng-blur="saveSetting('singaporeText')" ng-model="settings.singaporeText"></textarea>
-            <label ng-class="{ active: settings.singaporeText != '' }" for="singapore">Singapore</label>
         </div>
     </div>
 </div>
