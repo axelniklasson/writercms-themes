@@ -20,7 +20,8 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
         $locationProvider.html5Mode(true);
 
         // Initialize ngFacebook
-        $facebookProvider.setAppId('1606132839695011');
+        $facebookProvider.setAppId('1539788846329411'); // PROD
+        // $facebookProvider.setAppId('1606132839695011'); // DEV
         $facebookProvider.setPermissions('publish_actions');
 
         /* API Base URL */
