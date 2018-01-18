@@ -20,11 +20,11 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
         $locationProvider.html5Mode(true);
 
         // Initialize ngFacebook
-        $facebookProvider.setAppId('1539788846329411');
+        $facebookProvider.setAppId('1606132839695011');
         $facebookProvider.setPermissions('publish_actions');
 
         /* API Base URL */
-        $httpProvider.defaults.base_url = 'https://writercms-core.axelniklasson.se';
+        $httpProvider.defaults.base_url = '/api';
         // $httpProvider.defaults.base_url = 'http://localhost:3000';
 
         /* Remove spinner */
