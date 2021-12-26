@@ -4,7 +4,8 @@
     "description": "Material theme for WriterCMS.",
     "author": "Axel Niklasson <info@axelniklasson.se>",
     "scripts": {
-        "dev": "gulp"
+        "dev": "gulp",
+        "bower": "bower install"
     },
     "repository": {
         "type": "git",
@@ -12,6 +13,7 @@
     },
     "license": "MIT",
     "dependencies": {
+        "bower": "^1.8.13",
         "gulp": "^3.9.1",
         "gulp-clean-css": "^2.0.10",
         "gulp-concat": "^2.6.0",

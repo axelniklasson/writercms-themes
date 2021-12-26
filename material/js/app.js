@@ -1,5 +1,5 @@
 /* Angular init */
-var writer = angular.module('writer', ['ui.router', 'angular-loading-bar', 'ngAnalytics', 'ngMap', 'ngFacebook',
+var writer = angular.module('writer', ['ui.router', 'angular-loading-bar', 'ngMap', 'ngFacebook',
 'writer.controllers', 'writer.services', 'writer.filters', 'writer.directives', 'writer.interceptors']);
 
 /* Module setup */
@@ -192,7 +192,7 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
 
 
     /* Adding authentication */
-    writer.run(function ($rootScope, $state, $window, $location, AuthService, ngAnalyticsService) {
+    writer.run(function ($rootScope, $state, $window, $location, AuthService) {
         $rootScope.authenticated = AuthService.isAuthenticated();
 
         // Load Facebook JS SDK
@@ -216,9 +216,6 @@ writer.config(function($stateProvider, $locationProvider, $urlRouterProvider,
 
         // Initialize Google Analytics
         $window.ga('create', 'UA-72529449-3', 'auto');
-        $window.ga(function(tracker) {
-            ngAnalyticsService.setClientId('247299331510-g9jvenk0bcvo406gd2mrdabd49550p7b.apps.googleusercontent.com');
-        });
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             if (toState.authenticate && !AuthService.isAuthenticated()) {
